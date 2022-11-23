@@ -7,13 +7,22 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
+import Layout from "./components/admin/Layout";
+import Dashboard from "./components/pages/Dashboard";
+import Product from "./components/Products";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route exact path="/home" element={<App />}></Route>
+      <Route exact path="/" element={<App />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
+      {/* <Route path="/admin" element={<Dashboard />}></Route> */}
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Dashboard />}></Route>
+        <Route path="products" element={<Product />}></Route>
+      </Route>
     </Routes>
   </BrowserRouter>
 );
