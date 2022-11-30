@@ -9,7 +9,7 @@ import Register from "./components/Register";
 
 import Layout from "./components/admin/Layout";
 import Dashboard from "./components/pages/Dashboard";
-import Product from "./components/Products";
+import Room from "./components/Room";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,7 +21,8 @@ root.render(
       {/* <Route path="/admin" element={<Dashboard />}></Route> */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />}></Route>
-        <Route path="products" element={<Product />}></Route>
+        <Route path="products" element={<Room />}></Route>
+        <Route path="orders" element={<Room />}></Route>
       </Route>
     </Routes>
   </BrowserRouter>

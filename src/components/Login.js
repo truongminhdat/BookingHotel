@@ -1,4 +1,34 @@
+import axios from "axios";
+import { useState } from "react";
+
 function Home() {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+  const handleSubmit = async (error) => {
+    error.preventDefault();
+    try {
+      const url = "http://localhost:8001/auth/login";
+      const { data: res } = await axios.post(url, data);
+
+      sessionStorage.setItem("token", res.accessToken);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -75,10 +105,13 @@ function Home() {
 
               <div className="mb-6">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Email address"
+                  name="email"
+                  onChange={handleChange}
+                  value={data.email}
                 />
               </div>
 
@@ -88,6 +121,8 @@ function Home() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -109,10 +144,12 @@ function Home() {
                   Forgot password?
                 </a>
               </div>
+              <div className="text-gray-800">{data.msg}</div>
 
               <div className="text-center lg:text-left">
                 <button
                   type="button"
+                  onClick={handleSubmit}
                   className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Login
