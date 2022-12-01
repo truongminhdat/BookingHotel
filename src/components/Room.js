@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-const Product = () => {
+
+const Room = () => {
   return (
     <section class="bg-gray-50 dark:bg-gray-900">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -102,4 +102,4 @@ const Product = () => {
     </section>
   );
 };
-export default Product;
+export default Room;

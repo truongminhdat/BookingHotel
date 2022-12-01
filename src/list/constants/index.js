@@ -19,7 +19,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: "products",
     label: "Room",
-    path: "/products",
+    path: "/room",
     icon: <HiOutlineCube />,
   },
   {
@@ -44,6 +44,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     key: "messages",
     label: "Messages",
     path: "/messages",
+    icon: <HiOutlineAnnotation />,
+  },
+  {
+    key: "users",
+    label: "User",
+    path: "/user",
     icon: <HiOutlineAnnotation />,
   },
 ];
