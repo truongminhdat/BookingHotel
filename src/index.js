@@ -6,11 +6,10 @@ import App from "./components/App";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-
+import Home from "./components/Home";
 import Layout from "./components/admin/Layout";
 import Dashboard from "./components/pages/Dashboard";
 import Room from "./components/Room";
-import User from "./components/User";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,9 +21,9 @@ root.render(
       {/* <Route path="/admin" element={<Dashboard />}></Route> */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />}></Route>
-        <Route path="room" element={<Room />}></Route>
+        <Route path="products" element={<Room />}></Route>
         <Route path="orders" element={<Room />}></Route>
-        <Route path="user" element={<User />}></Route>
+        <Route path="home" element={<Home />}></Route>
       </Route>
     </Routes>
   </BrowserRouter>
