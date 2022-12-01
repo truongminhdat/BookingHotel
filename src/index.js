@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Layout from "./components/admin/Layout";
 import Dashboard from "./components/pages/Dashboard";
 import Room from "./components/Room";
+import User from "./components/User";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,7 @@ root.render(
         <Route path="products" element={<Room />}></Route>
         <Route path="orders" element={<Room />}></Route>
         <Route path="home" element={<Home />}></Route>
+        <Route path="user" element={<User />}></Route>
       </Route>
     </Routes>
   </BrowserRouter>

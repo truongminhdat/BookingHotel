@@ -46,6 +46,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/messages",
     icon: <HiOutlineAnnotation />,
   },
+  {
+    key: "user",
+    label: "User",
+    path: "/user",
+    icon: <HiOutlineAnnotation />,
+  },
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
