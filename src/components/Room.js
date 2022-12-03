@@ -148,7 +148,7 @@ const Products = () => {
                   for="roomImg"
                   className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  image
+                  Image
                 </label>
                 <input
                   type="file"

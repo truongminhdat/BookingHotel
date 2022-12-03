@@ -292,12 +292,12 @@ const User = () => {
             <>
               {showModal ? (
                 <>
-                  <div className="justify-center  items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                    <div className="relative w-auto my-6 mx-auto max-w-4xl">
+                  <div className="backdrop-brightness-75 backdrop-blur-[2px] justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                    <div className="relative w-auto my-6 mx-auto max-w-4xl bg-none">
                       {/*content*/}
-                      <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                      <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-300 outline-none focus:outline-none">
                         {/*header*/}
-                        <div className="flex items-start justify-between p-2 border-b border-solid 200 rounded-t">
+                        <div className="flex items-start justify-between p-2 border-b border-solid  rounded-t">
                           <h3 className="text-3xl font-semibold">Add User</h3>
                           <button
                             className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -310,53 +310,53 @@ const User = () => {
                         </div>
                         {/*body*/}
                         <div class="w-full max-w-xs">
-                          <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                          <form class="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div class="mb-4">
                               <label
-                                class="block text-gray-700 text-sm font-bold mb-2"
+                                class="block text-gray-700 text-md font-bold mb-2"
                                 for="username"
                               >
-                                Username
+                                User Name
                               </label>
                               <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="username"
                                 type="text"
-                                placeholder="Username"
+                                placeholder="User Name"
                               />
                             </div>
                             <div class="mb-4">
                               <label
-                                class="block text-gray-700 text-sm font-bold mb-2"
-                                for="firstName"
+                                class="block text-gray-700 text-md font-bold mb-2"
+                                for="FirstName"
                               >
-                                firstName
+                                First Name
                               </label>
                               <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 id="firstName"
                                 type="lastName"
-                                placeholder="FirstName"
+                                placeholder="First Name"
                               />
                             </div>
                             <div class="mb-4">
                               <label
-                                class="block text-gray-700 text-sm font-bold mb-2"
-                                for="firstName"
+                                class="block text-gray-700 text-md font-bold mb-2"
+                                for="lastName"
                               >
-                                lastName
+                                Last Name
                               </label>
                               <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 id="firstName"
                                 type="lastName"
-                                placeholder="lastName"
+                                placeholder="Last Name"
                               />
                             </div>
                             <div class="mb-4">
                               <label
-                                class="block text-gray-700 text-sm font-bold mb-2"
-                                for="firstName"
+                                class="block text-gray-700 text-md font-bold mb-2"
+                                for="address"
                               >
                                 Address
                               </label>
@@ -369,49 +369,67 @@ const User = () => {
                             </div>
                             <div class="mb-4">
                               <label
-                                class="block text-gray-700 text-sm font-bold mb-2"
+                                class="block text-gray-700 text-md font-bold mb-2"
                                 for="firstName"
                               >
-                                phoneNumber
+                                Phone Number
                               </label>
                               <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 id="firstName"
                                 type="lastName"
-                                placeholder="phoneNumber"
+                                placeholder="Phone Number"
                               />
                             </div>
-                            <div class="flex items-center mb-4">
+                            <div className="mb-4 flex flex-col justify-center">
+                              <label
+                                className="text-gray-700 text-md font-bold mb-2"
+                                for="role"
+                              >
+                                Role
+                              </label>
+                              <select
+                                className=" shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+                                id="role"
+                                name="role"
+                              >
+                                <option value="" disabled selected hidden>
+                                  Choose role...
+                                </option>
+                                <option value="admin">Admin</option>
+                                <option value="staff">Staff</option>
+                                <option value="user">User</option>
+                              </select>
+                            </div>
+                            <div class="flex items-center mb-2">
                               <input
-                                id="country-option-3"
+                                id="male"
                                 type="radio"
-                                name="countries"
-                                value="Nam"
+                                name="gender"
                                 class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-                                aria-labelledby="country-option-3"
-                                aria-describedby="country-option-3"
+                                aria-labelledby="male"
+                                aria-describedby="male"
                               />
                               <label
-                                for="country-option-3"
-                                class="text-sm font-medium text-gray-900 ml-2 block"
+                                for="otherGender"
+                                class="text-md font-medium text-gray-900 ml-2 block"
                               >
-                                Nam
+                                Male
                               </label>
                             </div>
 
-                            <div class="flex items-center mb-4">
+                            <div class="flex items-center mb-2">
                               <input
-                                id="country-option-4"
+                                id="female"
                                 type="radio"
-                                name="female"
-                                value="United Kingdom"
+                                name="gender"
                                 class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-                                aria-labelledby="country-option-4"
-                                aria-describedby="country-option-4"
+                                aria-labelledby="female"
+                                aria-describedby="female"
                               />
                               <label
-                                for="country-option-4"
-                                class="text-sm font-medium text-gray-900 ml-2 block"
+                                for="female"
+                                class="text-md font-medium text-gray-900 ml-2 block"
                               >
                                 FeMale
                               </label>
@@ -419,17 +437,16 @@ const User = () => {
 
                             <div class="flex items-center mb-4">
                               <input
-                                id="country-option-3"
+                                id="otherGender"
                                 type="radio"
-                                name="other"
-                                value="Nam"
+                                name="gender"
                                 class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-                                aria-labelledby="country-option-3"
-                                aria-describedby="country-option-3"
+                                aria-labelledby="otherGender"
+                                aria-describedby="otherGender"
                               />
                               <label
-                                for="country-option-3"
-                                class="text-sm font-medium text-gray-900 ml-2 block"
+                                for="otherGender"
+                                class="text-md font-medium text-gray-900 ml-2 block"
                               >
                                 Other
                               </label>
