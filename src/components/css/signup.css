@@ -1,0 +1,17 @@
+.background-image{
+    background-image: url("F:\Code\ProjectIviettech\BookingHotel\FrontEnd\src\assets\Login.background.jpg"); 
+    animation: background-image 30s ease infinite;
+  }
+  
+  /* @keyframes background-image {
+    0% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1.2, 1.2);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  } */
+  
