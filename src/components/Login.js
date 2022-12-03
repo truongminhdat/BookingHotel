@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import signinCss from "./css/signup.css";
 
 function Login() {
   const [data, setData] = useState({
