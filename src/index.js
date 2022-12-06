@@ -12,6 +12,8 @@ import Dashboard from "./components/pages/Dashboard";
 import Room from "./components/Room";
 import User from "./components/User";
 import HotelScreen from "./components/trangchu/HotelScreen";
+import RoomDetail from "./components/roomDetail";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,10 +22,12 @@ root.render(
       <Route exact path="/trangchu" element={<HotelScreen />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
+      <Route path="RoomDetail" element={<RoomDetail />}></Route>
+
       {/* <Route path="/admin" element={<Dashboard />}></Route> */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />}></Route>
-        <Route path="products" element={<Room />}></Route>
+        <Route path="Room" element={<Room />}></Route>
         <Route path="orders" element={<Room />}></Route>
         <Route path="home" element={<Home />}></Route>
         <Route path="user" element={<User />}></Route>

@@ -9,27 +9,51 @@ const HotelScreen = () => {
   return (
     <>
       <Header />
-      <section className="book">
-        <div className="container flex_space">
+      <section className="book w-screen">
+        <div className="flex justify-center bg-cyan-900 py-3">
           <div className="form">
-            <form className="gird">
-              <input type="date" placeholder="Araival Date" />
-              <input type="date" placeholder="Araival Date" />
-              <input type="number" placeholder="Audurt" />
-              <input type="number" placeholder="Children" />
-              <input type="submit" value="CHECK AVAILABILITY" />
+            <form className="flex items-center  ">
+              <p className="text-white ">Arrival Date</p>
+              <input
+                type="date"
+                placeholder="Arrival Date"
+                className="py-1 px-1 mx-3 rounded-lg "
+              />
+              <p className="text-white">Depart Date</p>
+              <input
+                type="date"
+                placeholder="Depart Date"
+                className="py-1 px-1 mx-2 rounded-lg "
+              />
+              <input
+                type="number"
+                placeholder="Adult"
+                className="py-1 px-1 mx-2 rounded-lg w-28 text-center"
+              />
+              <input
+                type="number"
+                placeholder="Children"
+                className="py-1 p-1 mx-2 rounded-lg w-28 text-center"
+              />
+              <input
+                type="submit"
+                className="py-1 px-2 mx-2 rounded-lg text-md text-white cursor-pointer bg-cyan-700 hover:bg-green-700 hover:shadow-md hover:transition ease-in-out duration-150 hover:scale-110"
+                value="Check Availability"
+              />
             </form>
           </div>
         </div>
       </section>
-      <section className="about top mt-20">
-        <div className="container flex">
-          <div className="left">
-            <div className="heading">
-              <h1>Welcome</h1>
-              <h2>Crowny Hotel</h2>
+      <section className="py-5 px-5 w-screen">
+        <div className=" flex flex-row justify-center items-center w-screen bg-white">
+          <div className="left w-1/5">
+            <div className="heading relative px-5 ">
+              <h1 className="absolute text-9xl font-serif opacity-20">
+                Welcome
+              </h1>
+              <h2 className="text-6xl font-serif">Crowny Hotel</h2>
             </div>
-            <p>
+            <p className="">
               Khách sạn Hoàng Sơn Peace tọa lạc gần Quảng trường Đinh Tiên Hoàng
               - Công trình lịch sử chào mừng đại lễ 1000 năm Thăng Long Hà Nội.
               Nằm giữa trung tâm kinh tế và văn hóa của Thành Phố Ninh Bình,
@@ -45,11 +69,11 @@ const HotelScreen = () => {
               Bể Bơi, sân Tennis và các khu vui chơi giải trí khác được quy tụ
               trong một khuôn viên rộng lớn gần 15.000 m2.
             </p>
-            <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+            <button className="bg-cyan-900 hover:bg-green-700 hover:scale-110 hover:transition ease-in-out duration-150 text-white font-bold py-2 px-5 rounded mt-2">
               Contact Us
             </button>
           </div>
-          <div className="right">
+          <div className="right px-10 ">
             <img src={Khachsan}></img>
           </div>
         </div>

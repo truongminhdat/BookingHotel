@@ -32,7 +32,7 @@ function Login() {
   return (
     <section className="background-image  h-screen ">
       <div className="px-0 h-full text-gray-800">
-        <div className="flex xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full g-6 bg-gradient-to-r from-transparent to-white">
+        <div className="backdrop-blur-[5px] flex xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full g-6 bg-gradient-to-l from-white via-transparent">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0 "></div>
           <div className=" xl:ml-20 xl:w-3/12 lg:w-7/12 md:w-6/12 xl:mb-12 lg:mb-96 md:mb-96">
             <form>
@@ -92,7 +92,7 @@ function Login() {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="inline-block px-7 py-3 bg-slate-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-slate-800 hover:shadow-lg focus:bg-slate-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-800  active:shadow-lg transition duration-300 ease-in-out"
+                  className="inline-block px-7 py-3 bg-slate-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-slate-800 hover:shadow-lg focus:bg-slate-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-800  active:shadow-lg transition duration-300 ease-in-out hover:scale-110"
                 >
                   Login
                 </button>
