@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import 'tw-elements';
 
 import App from "./components/App";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
@@ -13,6 +14,9 @@ import Room from "./components/Room";
 import User from "./components/User";
 import TrangChu from "./components/trangchu/index";
 import RoomDetail from "./components/roomDetail";
+import PayMent from "./components/payment";
+import MailConfirm from "./components/MailConfirm";
+import PassConfirm from "./components/PassConfirm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +26,9 @@ root.render(
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="RoomDetail" element={<RoomDetail />}></Route>
+      <Route path="payment" element={<PayMent />}></Route>
+      <Route path="mailconfirm" element={<MailConfirm />}></Route>
+      <Route path="passwordconfirm" element={<PassConfirm />}></Route>
 
       {/* <Route path="/admin" element={<Dashboard />}></Route> */}
       <Route path="/" element={<Layout />}>
