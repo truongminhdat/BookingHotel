@@ -1,95 +1,74 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import bgImg from "../../assets/Login.background.jpg";
-import "./header.css";
 
-const Header = ({ title }) => {
+const Header = () => {
   return (
-    <div className="background-image bg-cover lg:h-[1200px] md:h-[500px] sm:h-[300px] w-screen ">
-      <nav className=" w-auto px-2 sm:px-4 py-2.5 bg-gradient-to-b from-cyan-900 to-transparent">
-        <div className="container flex flex-wrap items-center justify-between mx-auto ">
-          <span className="logoText text-white ">
-            <div className="">
-              <a
-                className="logoText flex flex-col pt-6 items-end rounded-xl hover:no-underline pb-4 px-4 transition duration-200 ease-in-out hover:scale-105"
-                href="./trangchu"
-              >
-                <h3 className="hodaText leading-[85px] text-9xl font-light tracking-tighter  text-white">
-                  HoDa
-                </h3>
-                <h4 className="bookingText text-3xl font-mono tracking-tighter text-white">
-                  Booking
-                </h4>
-              </a>
-            </div>
-          </span>
-          <div
-            className="hidden w-full md:block md:w-auto "
-            id="navbar-default"
-          >
-            <ul className="flex flex-col p-4 mt-4 lg:text-lg md:flex-row md:space-x-8 md:mt-0 sm:text-sm md:font-medium drop-shadow-md">
-              <li className="w-16 text-center">
-                <a
-                  href="#"
-                  className="block text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                  aria-current="page"
-                >
-                  Home
-                </a>
-              </li>
-              <li className="w-16 text-center">
-                <a
-                  href="#"
-                  className="block py-2  text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                >
-                  About
-                </a>
-              </li>
-              <li className="w-24 text-center">
-                <a
-                  href="#"
-                  className="block py-2 text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                >
-                  Services
-                </a>
-              </li>
-              <li className="w-20 text-center">
-                <a
-                  href="#"
-                  className="block py-2   text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                >
-                  Pricing
-                </a>
-              </li>
-              <li className="w-20 text-center">
-                <a
-                  href="#"
-                  className="block py-2  text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                >
-                  Contact
-                </a>
-              </li>
-              <li className="w-16 text-center">
-                <a
-                  href="#"
-                  className="block py-2 text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                >
-                  Login
-                </a>
-              </li>
-              <li className="w-20 text-center">
-                <a
-                  href="#"
-                  className="block py-2 text-white rounded hover:no-underline hover:bg-cyan-900 md:p-0 transition duration-150 ease-in-out hover:scale-110 "
-                >
-                  Register
-                </a>
-              </li>
-            </ul>
-          </div>
+    <header className="bg-sky-300 py-6">
+      <nav className="flex flex-row justify-between items-center">
+        <div className="logo basis-2/6 text-center text-xl font-semibold cursor-pointer">
+          VietNamBooking
         </div>
+        <ul className="basis-3/6 flex items-center justify-end gap-8 uppercase text-sm text-white-500 font-medium">
+          <li>
+            <Link
+              href="#"
+              className=" text-gray-500 cursor-pointer py-1 hover:text-white-800 relative after:bottom-0 after:left-0 after:bg-slate-900
+    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-in-out after:duration-300"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <a
+              href="#"
+              className=" text-gray-500 cursor-pointer py-1 hover:text-white-800 relative after:bottom-0 after:left-0 after:bg-slate-900
+    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-in-out after:duration-300"
+            >
+              Khách sạn
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className=" text-gray-500 cursor-pointer py-1 hover:text-white-800 relative after:bottom-0 after:left-0 after:bg-slate-900
+    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-in-out after:duration-300"
+            >
+              Giới thiệu
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className=" text-gray-500 cursor-pointer py-1 hover:text-white-800 relative after:bottom-0 after:left-0 after:bg-slate-900
+    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-in-out after:duration-300"
+            >
+              Liên hệ
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className=" text-gray-500 cursor-pointer py-1 hover:text-white-800 relative after:bottom-0 after:left-0 after:bg-slate-900
+    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-in-out after:duration-300"
+            >
+              Đăng nhập
+            </a>
+          </li>
+        </ul>
+        <ul className="basis-1/6 flex justify-start items-center ml-6">
+          <li>
+            <a
+              href="#"
+              className="text-gray-500 cursor-pointer py-1 hover:text-white-800 relative after:bottom-0 after:left-0 after:bg-slate-900
+    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-in-out after:duration-300 decoration-solid"
+            >
+              Đăng ký
+            </a>
+          </li>
+        </ul>
       </nav>
-    </div>
+    </header>
   );
 };
 

@@ -1,23 +1,8 @@
-.counter{
-    background-image: url("../../assets/khachsan.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 30vh;
-    width: 100%;
+.fa-star{
+    color: yellow;
 }
-/* .counter .grid{
-    grid-template-columns: repeat(4,1fr);
-    text-align: center;
-    place-items: center;
-    padding-top: 60px;
-} */
-/* .counter h1{
-    font-size: 50px;
-} */
-.counter hr{
-    width: 50%;
-    margin: 10px auto;
-    background: #7fc142;
-    height: 3px;
-    border: none;
+.del{
+text-decoration: line-through;
+color: rgb(64, 64, 64);
+font-size: 15px;
 }

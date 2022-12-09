@@ -11,15 +11,14 @@ import Layout from "./components/admin/Layout";
 import Dashboard from "./components/pages/Dashboard";
 import Room from "./components/Room";
 import User from "./components/User";
-import HotelScreen from "./components/trangchu/HotelScreen";
+import TrangChu from "./components/trangchu/index";
 import RoomDetail from "./components/roomDetail";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route exact path="/trangchu" element={<HotelScreen />}></Route>
+      <Route exact path="/trangchu" element={<TrangChu />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="RoomDetail" element={<RoomDetail />}></Route>
