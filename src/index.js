@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import 'tw-elements';
 
 import App from "./components/App";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
@@ -17,6 +16,7 @@ import RoomDetail from "./components/roomDetail";
 import PayMent from "./components/payment";
 import MailConfirm from "./components/MailConfirm";
 import PassConfirm from "./components/PassConfirm";
+import Role from "./components/Role";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -37,6 +37,7 @@ root.render(
         <Route path="orders" element={<Room />}></Route>
         <Route path="home" element={<Home />}></Route>
         <Route path="user" element={<User />}></Route>
+        <Route path="role" element={<Role />}></Route>
       </Route>
     </Routes>
   </BrowserRouter>

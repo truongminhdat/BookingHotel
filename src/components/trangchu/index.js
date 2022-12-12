@@ -2,7 +2,7 @@ import React from "react";
 import Room from "./Room";
 import Header from "./Header";
 import HomeSlide from "./HomeSlide";
-import SlideRoom from "./SlideRoom";
+
 import RoomType from "./RoomType";
 import AddressHomeStay from "./AddressHomeStay";
 import BookingInstruction from "./BookingInstruction";

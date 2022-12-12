@@ -52,6 +52,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/user",
     icon: <HiOutlineAnnotation />,
   },
+  {
+    key: "role",
+    label: "Role",
+    path: "/role",
+    icon: <HiOutlineAnnotation />,
+  },
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

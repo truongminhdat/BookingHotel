@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { format } from "date-fns";
+import userApi from "../services/userService";
 
-export default function RecentOrders() {
+function RecentOrders() {
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8001/auth/getAllUser")
-      .then((res) => {
-        console.log(res);
-        setPosts(res.data.getAllUser);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchUser = async () => {
+      const { data } = await userApi.getAll();
+
+      setPosts(data.getAllUser);
+    };
+    fetchUser();
   }, []);
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -57,3 +56,5 @@ export default function RecentOrders() {
     </div>
   );
 }
+
+export default RecentOrders;
