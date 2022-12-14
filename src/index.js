@@ -12,7 +12,7 @@ import Dashboard from "./components/pages/Dashboard";
 import Room from "./components/Room";
 import User from "./components/User";
 import TrangChu from "./components/trangchu/index";
-import RoomDetail from "./components/roomDetail";
+import RoomDetail from "./components/trangchu/roomDetail";
 import PayMent from "./components/payment";
 import MailConfirm from "./components/MailConfirm";
 import PassConfirm from "./components/PassConfirm";
@@ -25,7 +25,7 @@ root.render(
       <Route exact path="/trangchu" element={<TrangChu />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
-      <Route path="RoomDetail" element={<RoomDetail />}></Route>
+      <Route path="roomdetail" element={<RoomDetail />}></Route>
       <Route path="payment" element={<PayMent />}></Route>
       <Route path="mailconfirm" element={<MailConfirm />}></Route>
       <Route path="passwordconfirm" element={<PassConfirm />}></Route>
