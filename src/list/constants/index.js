@@ -58,6 +58,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/role",
     icon: <HiOutlineAnnotation />,
   },
+  {
+    key: "roomType",
+    label: "roomTypeAdmin",
+    path: "/roomTypeAdmin",
+    icon: <HiOutlineAnnotation />,
+  },
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

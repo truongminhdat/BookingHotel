@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import roleApi from "../services/roleService";
-import ModalRole from "./modal/modalRole";
+import ModalRoomType from "./modal/modalRoomType";
 
-const Role = () => {
+import roomTypeApi from "../services/roomTypeService";
+const RoomTypeAdmin = () => {
   const [showModal, setShowModal] = React.useState(false);
-  const [showEditModal, setShowEditModal] = React.useState(false);
-  const [roles, setRole] = useState([]);
-
+  const [roomType, setRoomType] = useState([]);
   useEffect(() => {
     const fetchRole = async () => {
-      const { data } = await roleApi.getAllRole();
+      const { data } = await roomTypeApi.getAllRoomType();
 
-      setRole(data.getAllRole);
+      setRoomType(data.getAllRoomType);
     };
     fetchRole();
   }, []);
@@ -40,7 +38,7 @@ const Role = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    UserName
+                    Room Name
                   </th>
 
                   <th
@@ -52,16 +50,12 @@ const Role = () => {
                 </tr>
               </thead>
               <tbody>
-                {roles.map((role) => (
+                {roomType.map((role) => (
                   <tr key={role.id}>
                     <td>{role.id}</td>
-                    <td>{role.username}</td>
+                    <td>{role.name}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <button
-                        className="pr-2"
-                        type="button"
-                        onClick={() => setShowEditModal(true)}
-                      >
+                      <button className="pr-2" type="button">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -101,7 +95,7 @@ const Role = () => {
             <>
               {showModal ? (
                 <>
-                  <ModalRole
+                  <ModalRoomType
                     onClick={() => !showModal}
                     setShowModal={setShowModal}
                   />
@@ -114,4 +108,4 @@ const Role = () => {
     </div>
   );
 };
-export default Role;
+export default RoomTypeAdmin;

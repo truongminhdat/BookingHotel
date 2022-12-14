@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import roleApi from "../../services/roleService";
+import { useState } from "react";
+import roomTypeApi from "../../services/roomTypeService";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ModalRole = ({ setShowModal }) => {
-  const [username, setName] = useState(null);
+const ModalRoomType = ({ setShowModal }) => {
+  const [name, setName] = useState("");
   const handleSubmit = async () => {
-    let data = { username };
-    let res = await roleApi.postRole(data);
-    console.log("check res", res);
+    let data = { name };
+    let res = await roomTypeApi.postRoomType(data);
+
     if (res) {
-      toast.success("Save role Success");
+      alert("Thêm thành công");
     } else {
-      toast.error("Save role error");
+      toast.error("Add Room Type Error ");
     }
   };
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -23,7 +25,7 @@ const ModalRole = ({ setShowModal }) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Add User</h3>
+              <h3 className="text-3xl font-semibold">Add Room Type</h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -33,7 +35,7 @@ const ModalRole = ({ setShowModal }) => {
                 </span>
               </button>
             </div>
-            {/*body*/}
+
             <div className="relative p-6 flex-auto">
               <form className=" space-y-4 md:space-y-2" action="#">
                 <div>
@@ -45,12 +47,11 @@ const ModalRole = ({ setShowModal }) => {
                   </label>
                   <input
                     type="text"
-                    name="username"
-                    id="roomName"
+                    name="name"
                     onChange={(event) => {
                       setName(event.target.value);
                     }}
-                    value={username}
+                    value={name}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
                   />
                 </div>
@@ -80,4 +81,4 @@ const ModalRole = ({ setShowModal }) => {
     </>
   );
 };
-export default ModalRole;
+export default ModalRoomType;

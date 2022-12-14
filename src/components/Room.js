@@ -1,171 +1,103 @@
-import React from "react";
-
-// $("input[data-type='currency']").on({
-//   keyup: function () {
-//     formatCurrency($(this));
-//   },
-//   blur: function () {
-//     formatCurrency($(this), "blur");
-//   },
-// });
-
-// function formatNumber(n) {
-//   return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-// }
-// function formatCurrency(input, blur) {
-//   var input_val = input.val();
-//   if (input_val === "") {
-//     return;
-//   }
-//   var original_len = input_val.length;
-//   var caret_pos = input.prop("selectionStart");
-//   if (input_val.indexOf(".") >= 0) {
-//     var decimal_pos = input_val.indexOf(".");
-//     var left_side = input_val.substring(0, decimal_pos);
-//     var right_side = input_val.substring(decimal_pos);
-//     left_side = formatNumber(left_side);
-//     right_side = formatNumber(right_side);
-//     if (blur === "blur") {
-//       right_side += "00";
-//     }
-//     right_side = right_side.substring(0, 2);
-//     input_val = "$" + left_side + "." + right_side;
-//   } else {
-//     input_val = formatNumber(input_val);
-//     input_val = "$" + input_val;
-//     if (blur === "blur") {
-//       input_val += ".00";
-//     }
-//   }
-//   input.val(input_val);
-//   var updated_len = input_val.length;
-//   caret_pos = updated_len - original_len + caret_pos;
-//   input[0].setSelectionRange(caret_pos, caret_pos);
-// }
+import React, { useState } from "react";
+import roleApi from "../services/roleService";
+import ModalRoom from "./modal/modalRoom";
 
 const Room = () => {
+  const [showModal, setShowModal] = React.useState(false);
+  const [roles, setRole] = useState([]);
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <p className="flex items-center mb-6 text-3xl font-extrabold text-gray-900 dark:text-white">
-          <span className="text-gray-100">Add Room</span>
-        </p>
-        <div className="w-full md:w-1/2 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="lg:p-7 space-y-4 md:space-y-5 sm:p-4">
-            <form className=" space-y-4 md:space-y-2" action="#">
-              <div>
-                <label
-                  for="roomName"
-                  className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Room Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="roomName"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
-                />
-              </div>
-              <div>
-                <label
-                  for="email"
-                  className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  id="roomTitle"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                />
-              </div>
-              <div>
-                <label
-                  for="status"
-                  className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Room Status
-                </label>
-                <textarea
-                  type="text"
-                  name="status"
-                  id="roomStatus"
-                  className="room-status bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                />
-              </div>
-              <div>
-                <label
-                  for="convenient"
-                  className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Room Convenient
-                </label>
-                <textarea
-                  type="text"
-                  name="convenient"
-                  id="roomConvenient"
-                  className=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
-                />
-              </div>
-              <div>
-                <label
-                  for="roomType"
-                  className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Room Type
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  id="roomType"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                />
-              </div>
-              <div>
-                <label
-                  for="currency-field"
-                  className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Price
-                </label>
-                <input
-                  type="text"
-                  name="currency-field"
-                  id="price"
-                  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                  data-type="currency"
-                  placeholder="$1,000,000.00"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                />
-              </div>
-              <div>
-                <label
-                  for="roomImg"
-                  className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Image
-                </label>
-                <input
-                  type="file"
-                  accept="image/png, image/jpeg, image/jpg"
-                  name="image"
-                  id="roomImg"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full mb-3 lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full text-black bg-slate-400 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:hover:text-white dark:focus:ring-slate-100 dark:focus:text-white"
-              >
-                Create Room
-              </button>
-            </form>
+    <div className="flex flex-col">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <button
+          className="bg-blue-500 ml-10 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          type="button"
+          onClick={() => setShowModal(true)}
+        >
+          Add User
+        </button>
+        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden">
+            <table className="min-w-full">
+              <thead className="bg-white border-b">
+                <tr>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    id
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    UserName
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {roles.map((post) => (
+                  <tr key={post.id}>
+                    <td>{post.id}</td>
+                    <td>{post.username}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <button className="pr-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                          />
+                        </svg>
+                      </button>
+                      <button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <>
+              {showModal ? (
+                <>
+                  <ModalRoom
+                    onClick={() => !showModal}
+                    setShowModal={setShowModal}
+                  />
+                </>
+              ) : null}
+            </>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 export default Room;

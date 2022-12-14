@@ -17,6 +17,7 @@ import PayMent from "./components/payment";
 import MailConfirm from "./components/MailConfirm";
 import PassConfirm from "./components/PassConfirm";
 import Role from "./components/Role";
+import RoomTypeAdmin from "./components/roomTypeAdmin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -38,6 +39,7 @@ root.render(
         <Route path="home" element={<Home />}></Route>
         <Route path="user" element={<User />}></Route>
         <Route path="role" element={<Role />}></Route>
+        <Route path="roomtypeAdmin" element={<RoomTypeAdmin />}></Route>
       </Route>
     </Routes>
   </BrowserRouter>
