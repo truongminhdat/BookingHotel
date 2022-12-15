@@ -1,4 +1,52 @@
-const ModalUser = ({ setShowModal }) => {
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import userApi from "../../services/userService";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
+import {
+  Grid,
+  Box,
+  SFormControl,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Menu,
+  FormHelperText,
+} from "@mui/material";
+
+const ModalUser = ({ setShowModal, title }) => {
+  const [users, setUsers] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+    gender: "",
+    avatar: "",
+    dayOfBirth: "",
+    roleId: "",
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    let response = await userApi.createPostUser({ ...data });
+    if (response && response.status === 200) {
+      toast.success("Create user success");
+    } else {
+      toast.error("Error create user");
+    }
+  };
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -7,7 +55,7 @@ const ModalUser = ({ setShowModal }) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Add User</h3>
+              <h3 className="text-3xl font-semibold">{title}</h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -17,130 +65,124 @@ const ModalUser = ({ setShowModal }) => {
                 </span>
               </button>
             </div>
-            {/*body*/}
+
             <div className="relative p-6 flex-auto">
-              <form class="w-full max-w-lg">
-                <div class="flex flex-wrap -mx-3 mb-2">
-                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-city"
-                    >
-                      Username
-                    </label>
-                    <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-city"
-                      type="text"
-                      placeholder="Username"
-                    />
-                  </div>
-                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-state"
-                    >
-                      LastName
-                    </label>
-                    <div class="relative">
-                      <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-city"
-                        type="text"
-                        placeholder="LastName"
-                      />
-                    </div>
-                  </div>
-                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-zip"
-                    >
-                      FirstName
-                    </label>
-                    <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-zip"
-                      type="text"
-                      placeholder="FirstName"
-                    />
-                  </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                  <div class="w-full px-3">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-password"
-                    >
-                      Address
-                    </label>
-                    <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-password"
-                      type="password"
-                      placeholder="Address"
-                    />
-                  </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-2">
-                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-city"
-                    >
-                      PhoneNumber
-                    </label>
-                    <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-city"
-                      type="text"
-                      placeholder="Phone Number"
-                    />
-                  </div>
-                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-state"
-                    >
-                      Role
-                    </label>
-                    <div class="relative">
-                      <select
-                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state"
-                      >
-                        <option>Staff</option>
-                        <option>Admin</option>
-                        <option>User</option>
-                      </select>
-                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg
-                          class="fill-current h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-zip"
-                    >
-                      Gender
-                    </label>
-                    <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-zip"
-                      type="text"
-                      placeholder="Gender"
-                    />
-                  </div>
-                </div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="username"
+                  name="username"
+                  placeholder="Username"
+                  {...register("username", { required: true })}
+                  error={errors.username}
+                  helperText="username is required"
+                />
+
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="firstName"
+                  name="firstName"
+                  placeholder="firstName"
+                  {...register("firstName", { required: true })}
+                  error={errors.firstName}
+                  helperText={errors.firstName && "firstName is required"}
+                />
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="lastName"
+                  name="lastName"
+                  placeholder="lastName"
+                  {...register("phoneNumber", { required: true })}
+                  error={errors.lastName}
+                  helperText={errors.lastName && "lastName is required"}
+                />
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="ngày sinh"
+                  name="dayOfBirth"
+                  placeholder="ngày sinh"
+                  {...register("dayOfBirth", { required: true })}
+                  error={errors.dayOfBirth}
+                  helperText={errors.dayOfBirth && "dayOfBirth is required"}
+                />
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="email"
+                  name="email "
+                  placeholder="email"
+                  {...register("email", { required: true })}
+                  error={errors.email}
+                  helperText={errors.email && "email is required"}
+                />
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="address"
+                  name="address"
+                  placeholder="address"
+                  {...register("address", { required: true })}
+                  error={errors.email}
+                  helperText={errors.email && "email is required"}
+                />
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="gender"
+                  name="gender"
+                  placeholder="gender"
+                  {...register("gender")}
+                  error={errors.gender}
+                  helperText={errors.gender && "gender is required"}
+                />
+
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="lastName"
+                  name="lastName"
+                  placeholder="Username"
+                  {...register("lastName")}
+                />
+                <TextField
+                  sx={{ padding: "10px" }}
+                  label="avatar"
+                  name="avatar"
+                  placeholder="avatar"
+                  {...register("avatar")}
+                />
+                <FormControl>
+                  <Select
+                    style={{ marginTop: "10px" }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setUsers({ ...users, roleId: e.target.value });
+                    }}
+                    value={users.role}
+                    placeholder="choose"
+                    label="role"
+                    {...register("roleId")}
+                  >
+                    <MenuItem value="Choose">Choose role</MenuItem>
+                    <MenuItem value={1}>admin</MenuItem>
+                    <MenuItem value="2">user</MenuItem>
+                  </Select>
+                  <FormHelperText style={{ color: "red" }}>
+                    required
+                  </FormHelperText>
+                </FormControl>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  style={{
+                    display: "block",
+                    width: "150px",
+                    marginTop: "20px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  Create
+                </Button>
               </form>
             </div>
+
             {/*footer*/}
             <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
               <button
@@ -149,13 +191,6 @@ const ModalUser = ({ setShowModal }) => {
                 onClick={() => setShowModal(false)}
               >
                 Close
-              </button>
-              <button
-                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Save Changes
               </button>
             </div>
           </div>
