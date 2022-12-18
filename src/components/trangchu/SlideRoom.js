@@ -14,7 +14,7 @@ const SlideRoom = () => {
   };
   return (
     <>
-      <div className="text">Phòng Víp</div>
+      <div className="text">Phòng Cao Cấp</div>
       <Slider {...settings}>
         <div className="section-body">
           <div className="section-customize">

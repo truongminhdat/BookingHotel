@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ModalUser from "./modal/modalUser";
 import userApi from "../services/userService";
 
 const User = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [users, setUsers] = useState([]);
-
-  useEffect(() => {
+  const fetch = useCallback(async () => {
     const fetchUser = async () => {
       const { data } = await userApi.getAll();
       if (data) {
@@ -14,6 +13,9 @@ const User = () => {
       }
     };
     fetchUser();
+  }, [users]);
+  useEffect(() => {
+    fetch();
   }, []);
   return (
     <div className="flex flex-col">

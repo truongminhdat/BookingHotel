@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import roleApi from "../../services/roleService";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -7,12 +8,13 @@ const ModalRole = ({ setShowModal }) => {
   const [username, setName] = useState(null);
   const handleSubmit = async () => {
     let data = { username };
+
     let res = await roleApi.postRole(data);
-    console.log("check res", res);
-    if (res) {
-      toast.success("Save role Success");
+
+    if (res && res.status === 200) {
+      toast.success("Create role the success!");
     } else {
-      toast.error("Save role error");
+      toast.error("Create role the error!");
     }
   };
   return (
@@ -72,6 +74,7 @@ const ModalRole = ({ setShowModal }) => {
               >
                 Save Changes
               </button>
+              <ToastContainer />
             </div>
           </div>
         </div>

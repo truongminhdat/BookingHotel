@@ -29,10 +29,16 @@ const ModalUser = ({ setShowModal, title }) => {
     address: "",
     phoneNumber: "",
     gender: "",
-    avatar: "",
+
     dayOfBirth: "",
     roleId: "",
   });
+  const [avatar, setAvatar] = useState();
+  const handleOnChangeImage = (e) => {
+    const file = e.target.files[0];
+    file.preview = URL.createObjectURL(file);
+    setAvatar(file);
+  };
   const {
     register,
     handleSubmit,
@@ -45,6 +51,7 @@ const ModalUser = ({ setShowModal, title }) => {
     } else {
       toast.error("Error create user");
     }
+    console.log("check data", data);
   };
 
   return (
@@ -66,120 +73,133 @@ const ModalUser = ({ setShowModal, title }) => {
               </button>
             </div>
 
-            <div className="relative p-6 flex-auto">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="username"
-                  name="username"
-                  placeholder="Username"
-                  {...register("username", { required: true })}
-                  error={errors.username}
-                  helperText="username is required"
-                />
+            <div className="relative p-4 flex-auto">
+              <form
+                className="mb-4 md:flex md:flex-wrap md:justify-between"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <div className="flex flex-col mb-4 md:w-full">
+                  <TextField
+                    sx={{ padding: "10px" }}
+                    label="username"
+                    name="username"
+                    placeholder="Username"
+                    {...register("username", { required: true })}
+                    error={errors.username}
+                    helperText="username is required"
+                  />
+                </div>
+                <div className="flex flex-col mb-4 md:w-1/2">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="firstName"
+                    name="firstName"
+                    placeholder="firstName"
+                    {...register("firstName", { required: true })}
+                    error={errors.firstName}
+                    helperText="firstName is required"
+                  />
+                </div>
+                <div class="flex flex-col mb-4 md:w-1/2">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="lastName"
+                    name="lastName"
+                    placeholder="lastName"
+                    {...register("lastName", { required: true })}
+                    error={errors.lastName}
+                    helperText="lastName is required"
+                  />
+                </div>
+                <div className="flex flex-col mb-4 md:w-1/2">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="phoneNumber"
+                    {...register("phoneNumber", { required: true })}
+                    error={errors.phoneNumber}
+                    helperText="phoneNumber is required"
+                  />
+                </div>
+                <div className="flex flex-col mb-4 md:w-1/2">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="email"
+                    name="email"
+                    placeholder="email"
+                    {...register("email", { required: true })}
+                    error={errors.email}
+                    helperText="email is required"
+                  />
+                </div>
 
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="firstName"
-                  name="firstName"
-                  placeholder="firstName"
-                  {...register("firstName", { required: true })}
-                  error={errors.firstName}
-                  helperText={errors.firstName && "firstName is required"}
-                />
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="lastName"
-                  name="lastName"
-                  placeholder="lastName"
-                  {...register("phoneNumber", { required: true })}
-                  error={errors.lastName}
-                  helperText={errors.lastName && "lastName is required"}
-                />
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="ngày sinh"
-                  name="dayOfBirth"
-                  placeholder="ngày sinh"
-                  {...register("dayOfBirth", { required: true })}
-                  error={errors.dayOfBirth}
-                  helperText={errors.dayOfBirth && "dayOfBirth is required"}
-                />
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="email"
-                  name="email "
-                  placeholder="email"
-                  {...register("email", { required: true })}
-                  error={errors.email}
-                  helperText={errors.email && "email is required"}
-                />
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="address"
-                  name="address"
-                  placeholder="address"
-                  {...register("address", { required: true })}
-                  error={errors.email}
-                  helperText={errors.email && "email is required"}
-                />
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="gender"
-                  name="gender"
-                  placeholder="gender"
-                  {...register("gender")}
-                  error={errors.gender}
-                  helperText={errors.gender && "gender is required"}
-                />
+                <div className="flex flex-col mb-4 md:w-full">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="address"
+                    name="address"
+                    placeholder="address"
+                    {...register("address", { required: true })}
+                    error={errors.address}
+                    helperText="address is required"
+                  />
+                </div>
+                <div className="flex flex-col mb-4 md:w-1/2">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="gender"
+                    name="gender"
+                    placeholder="gender"
+                    {...register("gender", { required: true })}
+                    error={errors.username}
+                    helperText="username is required"
+                  />
+                </div>
 
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="lastName"
-                  name="lastName"
-                  placeholder="Username"
-                  {...register("lastName")}
-                />
-                <TextField
-                  sx={{ padding: "10px" }}
-                  label="avatar"
-                  name="avatar"
-                  placeholder="avatar"
-                  {...register("avatar")}
-                />
-                <FormControl>
-                  <Select
-                    style={{ marginTop: "10px" }}
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      setUsers({ ...users, roleId: e.target.value });
+                <div className="flex flex-col  md:w-1/2">
+                  <TextField
+                    sx={{ padding: "5px" }}
+                    label="gender"
+                    name="gender"
+                    placeholder="Username"
+                    {...register("gender", { required: true })}
+                    error={errors.gender}
+                    helperText="gender is required"
+                  />
+                </div>
+                <div className="flex flex-col md:w-1/2">
+                  <div className="preview-img-container">
+                    <input
+                      id="preViewImg"
+                      type="file"
+                      hidden
+                      onChange={handleOnChangeImage}
+                      // {...register("avatar")}
+                    />
+                    <label className="label-upload" htmlFor="preViewImg">
+                      Tải ảnh
+                      <i className="fas fa-upload" />
+                      {avatar && (
+                        <img src={avatar.preview} alt="" width="80%" />
+                      )}
+                    </label>
+                  </div>
+                </div>
+                <div className="flex flex-col md:w-1/2">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{
+                      display: "block",
+                      width: "150px",
+                      marginTop: "20px",
+                      marginLeft: "5px",
                     }}
-                    value={users.role}
-                    placeholder="choose"
-                    label="role"
-                    {...register("roleId")}
                   >
-                    <MenuItem value="Choose">Choose role</MenuItem>
-                    <MenuItem value={1}>admin</MenuItem>
-                    <MenuItem value="2">user</MenuItem>
-                  </Select>
-                  <FormHelperText style={{ color: "red" }}>
-                    required
-                  </FormHelperText>
-                </FormControl>
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  style={{
-                    display: "block",
-                    width: "150px",
-                    marginTop: "20px",
-                    marginLeft: "5px",
-                  }}
-                >
-                  Create
-                </Button>
+                    Create
+                  </Button>
+                </div>
               </form>
             </div>
 
