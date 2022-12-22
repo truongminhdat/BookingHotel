@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import roleApi from "../services/roleService";
 import ModalRoom from "./modal/modalRoom";
+import axios from "../axios";
 
 const Room = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [roles, setRole] = useState([]);
+  const [room, setRoom] = useState([]);
+
+  useEffect(() => {
+    const fecthAllRoom = async () => {
+      try {
+        const res = axios.get("http://localhost:8001/room");
+        setRoom(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  });
+
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -13,7 +27,7 @@ const Room = () => {
           type="button"
           onClick={() => setShowModal(true)}
         >
-          Add User
+          Add Room
         </button>
         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div className="overflow-hidden">
@@ -22,7 +36,7 @@ const Room = () => {
                 <tr>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left disabled"
                   >
                     id
                   </th>
@@ -30,7 +44,42 @@ const Room = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    UserName
+                    Room Name
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Title
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Room Convenient
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Room type
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Price
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Avatar
                   </th>
 
                   <th
