@@ -9,6 +9,10 @@ class UserApi {
     const url = "/user/createUser";
     return axiosClient.post(url, data);
   };
+  getlimitHotel = () => {
+    const url = "/hotel/getlimithotel?featured=1&limit=4";
+    return axiosClient.get(url);
+  };
 }
 const userApi = new UserApi();
 export default userApi;
