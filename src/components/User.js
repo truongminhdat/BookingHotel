@@ -2,21 +2,51 @@ import React, { useCallback, useEffect, useState } from "react";
 import ModalUser from "./modal/modalUser";
 import userApi from "../services/userService";
 
+import axios from "../axios";
+
 const User = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [users, setUsers] = useState([]);
+
   const fetch = useCallback(async () => {
     const fetchUser = async () => {
       const { data } = await userApi.getAll();
+      console.log(data);
       if (data) {
         setUsers(data.getAllUser);
       }
     };
     fetchUser();
   }, [users]);
+
   useEffect(() => {
     fetch();
   }, []);
+
+  const handleAdd = async e =>{
+
+  }
+
+  const handleDelete = async (id) => {
+try {
+  await axios.delete("http://localhost:8001/auth/deleteuser"+id)
+  window.location.reload();
+} catch (error) {
+  console.log(error);
+}
+  }
+  // useEffect(() => {
+  //   const fecthAllUsers = async () => {
+  //     try {
+  //       const res = await axios.get("http://localhost:8001/auth/getuser")
+  //       setUsers(res.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fecthAllUsers();
+  // }, []);
+
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -48,13 +78,7 @@ const User = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Avatar
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Email
+                    FirstName
                   </th>
                   <th
                     scope="col"
@@ -66,20 +90,9 @@ const User = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    FirstName
+                    Email
                   </th>
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Address
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    PhoneNumber
-                  </th>
+
                   <th
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
@@ -90,7 +103,27 @@ const User = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
+                    Address
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    PhoneNumber
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
                     Role
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Avatar
                   </th>
                   <th
                     scope="col"
@@ -125,16 +158,16 @@ const User = () => {
                       {user.gender}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {user.role}
-                    </td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {user.address}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {user.phoneNumber}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {user.role}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {user.phoneNumber}
+                      {user.avatar && <img src={user.avatar} />}
                     </td>
 
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -156,6 +189,7 @@ const User = () => {
                       </button>
                       <button>
                         <svg
+                        onClick={() => handleDelete(user.id)}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
