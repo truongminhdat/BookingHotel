@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
+import React, { useCallback, useEffect, useRef, useState, useContext } from 'react';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from "validator/lib/isEmpty";
 import AuthContext from '../../../list/context/AuthProvider';
@@ -55,8 +55,7 @@ export default function Login() {
     
             
             if(response && response.status === 200){
-              localStorage.setItem("accesstoken", (response.data.accessToken));
-              localStorage.setItem("email",(email) )
+              localStorage.setItem("accessToken", (response.data.accessToken));
               navigate("/home");
             }
 

@@ -19,6 +19,7 @@ import List from "./page/list/List";
 import Home from "./page/home/Home.jsx";
 import PasswordReset from "./page/password/PasswordReset";
 import ForgotPassword from "./page/password/ForgotPassword";
+
 function App() {
   return (
     <BrowserRouter>
@@ -26,8 +27,10 @@ function App() {
         <Route exact path="/home" element={<Home />}></Route>
         <Route path="/hotels" element={<List />} />
         <Route path="/hotels/:id" element={<Hotel />} />
+
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+
         <Route path="roomDetail" element={<RoomDetail />}></Route>
         <Route path="payment" element={<PayMent />}></Route>
         <Route path="mailconfirm" element={<MailConfirm />}></Route>

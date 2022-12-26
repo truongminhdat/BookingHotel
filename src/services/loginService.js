@@ -5,3 +5,6 @@ export const LoginUser = (data) => {
 export const sendPassword = (data) => {
   return axiosClient.post(`/auth/sendPassword`, data);
 };
+export const authentation = (data) => {
+  return axiosClient.get(`/auth/auth`, data);
+};
