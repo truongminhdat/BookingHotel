@@ -1,9 +1,10 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Login from "../components/page/Login";
-import Register from "./Register";
+
+import Register from "./page/authentation/Register";
 
 import Layout from "./admin/Layout";
 import Dashboard from "./pages/Dashboard";
+import Login from "./page/login/Login";
 import Room from "./Room";
 import User from "./User";
 import TrangChu from "./trangchu/index";
@@ -16,11 +17,13 @@ import RoomTypeAdmin from "./roomTypeAdmin";
 import Hotel from "./page/hotel/Hotel";
 import List from "./page/list/List";
 import Home from "./page/home/Home.jsx";
+import PasswordReset from "./page/password/PasswordReset";
+import ForgotPassword from "./page/password/ForgotPassword";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home />}></Route>
+        <Route exact path="/home" element={<Home />}></Route>
         <Route path="/hotels" element={<List />} />
         <Route path="/hotels/:id" element={<Hotel />} />
         <Route path="/login" element={<Login />}></Route>
@@ -28,10 +31,14 @@ function App() {
         <Route path="roomDetail" element={<RoomDetail />}></Route>
         <Route path="payment" element={<PayMent />}></Route>
         <Route path="mailconfirm" element={<MailConfirm />}></Route>
-        <Route path="passwordconfirm" element={<PassConfirm />}></Route>
+        <Route path="password-reset" element={<PasswordReset />}></Route>
+        <Route
+          path="forgot-password/:id/:token"
+          element={<ForgotPassword />}
+        ></Route>
 
         {/* <Route path="/admin" element={<Dashboard />}></Route> */}
-        <Route path="/layout" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />}></Route>
           <Route path="Room" element={<Room />}></Route>
           <Route path="orders" element={<Room />}></Route>

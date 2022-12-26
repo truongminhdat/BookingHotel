@@ -3,6 +3,7 @@ import ModalUser from "./modal/modalUser";
 import userApi from "../services/userService";
 
 import axios from "../axios";
+import "./imgUser.css";
 
 const User = () => {
   const [showModal, setShowModal] = React.useState(false);
@@ -23,18 +24,16 @@ const User = () => {
     fetch();
   }, []);
 
-  const handleAdd = async e =>{
-
-  }
+  const handleAdd = async (e) => {};
 
   const handleDelete = async (id) => {
-try {
-  await axios.delete("http://localhost:8001/auth/deleteuser"+id)
-  window.location.reload();
-} catch (error) {
-  console.log(error);
-}
-  }
+    try {
+      await axios.delete("http://localhost:8001/auth/deleteuser" + id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // useEffect(() => {
   //   const fecthAllUsers = async () => {
   //     try {
@@ -140,10 +139,10 @@ try {
                     key={user.id}
                   >
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {user.id}
+                      {user.username}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {user.username}
+                      <img src={user.url} className="imgUser" />
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {user.firstName}
@@ -166,9 +165,7 @@ try {
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {user.role}
                     </td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {user.avatar && <img src={user.avatar} />}
-                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
 
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <button className="pr-2">
@@ -189,7 +186,7 @@ try {
                       </button>
                       <button>
                         <svg
-                        onClick={() => handleDelete(user.id)}
+                          onClick={() => handleDelete(user.id)}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"

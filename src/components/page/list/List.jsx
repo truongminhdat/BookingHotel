@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useCallback,useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import Header from "../header/Header";
 import Navbar from "../navbar/Navbar";
@@ -6,6 +6,9 @@ import { format } from 'date-fns'
 import './list.css'
 import { DateRange } from "react-date-range";
 import SearchItem from "../searchItem/SearchItem";
+import { getCityHotel } from "../../../services/hotelService";
+import useFetch from "../../hooks/useFetch"
+
    
 
 
@@ -15,7 +18,30 @@ const List = () => {
   const [destination, setDestination] = useState(location.state.destination)
   const [date, setDate] = useState(location.state.date)
   const [options, setOptions] = useState(location.state.options)
-  const [openDate, setOpenDate] = useState(false)
+  const [openDate, setOpenDate] = useState(false);
+
+//   const [hotels, setHotels] = useState([]);
+
+
+//   const fetch = useCallback(async () => {
+//     const fetchUser = async () => {
+//       const { data } = await getCityHotel();
+    
+   
+//       if (data) {
+//         setHotels(data.getHotel);
+//       }
+//     };
+//     fetchUser();
+//   }, [hotels]);
+//   useEffect(() => {
+//     fetch();
+//   }, []);
+const {data, loading, error} = useFetch("hotel/getcityHotel?city=Đà Nẵng");
+const datahe  = data.getHotel;
+console.log(datahe)
+
+  
     return(
         <div>
             <Navbar/>
@@ -27,7 +53,7 @@ const List = () => {
                 <h1 className="lsTitle">Search</h1>
                 <div className="lsItem">
                     <label>Tên chỗ nghỉ</label>
-                    <input type="text" className="textItem"/>
+                    <input type="text" className="textItem" placeholder={destination}/>
                 </div>
                 <div className="lsItem">
                     <label>Ngày đặt phòng</label>
@@ -84,10 +110,20 @@ const List = () => {
             </div>
 
             <div className="listResult">
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
+                
+            
+                          
+         <div className='searchItem'> 
+         <SearchItem/>
+    
+    
+     </div>
+
+          
+
+
+
+                            
             </div>
         </div>
        </div>

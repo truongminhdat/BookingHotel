@@ -2,13 +2,14 @@ import './searchItem.css'
 import Logo from "../../../assets/hoteldanang.png"
 const SearchItem = ()  => {
     return(
-        <div className='searchItem'>
+     
+         <div className='searchItem'>
             <img src={Logo} alt="" className='searchImg'/>
             <div className='siDesc'>
                 <h1 className='siTitle'>
-                    Khach san o Da lat
+                  Khach san
                 </h1>
-                <span className='siDistance'>500m from center</span>
+                <span className='siDistance'>Dai Minh</span>
                 <span className='siTaxiOp'>Free Aiport Taxi</span>
                 <span className='siSubtitle'>
                     Studio Atta Hotel
@@ -35,6 +36,8 @@ const SearchItem = ()  => {
 
        
         </div>
+ 
+       
     )
 }
 export default SearchItem

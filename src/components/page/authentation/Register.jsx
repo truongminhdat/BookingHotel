@@ -1,12 +1,54 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import "./css/bgImg.css";
+import "../../css/bgImg.css";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Register() {
   const [selectedDate, setSelectedDate] = useState(null);
-  return (
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [gender, setGender] = useState(""); 
+  const [file, setFiles] = useState("");
+  const [preview, setPreview] = useState("");
+  const [isError, setIsError] = useState("");
+
+  const loadImage = (e) => {
+    const file = e.target.files[0];
+    setFiles(file);
+    setPreview(URL.createObjectURL(file));
+  };
+  const saveUser = async(e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file",file);
+    formData.append("email",email);
+    formData.append("username",username);
+    formData.append("lastName",lastName);
+    formData.append("firstName",firstName);
+    formData.append("address", address);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("password",password);
+
+
+  }
+  const checkValidation = (e) => {
+    setconfirmPassword(e.target.value);
+    if(password != confirmPassword){
+        setIsError("Confirm password should be match with password !")
+    }
+    else{
+        setIsError("")
+    }
+
+  }
+  return ( 
     <div>
       <div className="background-image ">
         <div className="input-table backdrop-blur-[10px] flex flex-col items-center box-border min-h-screen pt-6 sm:justify-center sm:pt-0  ">
@@ -24,7 +66,10 @@ export default function Register() {
             </a>
           </div>
           <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-opacity-50 bg-white  shadow-lg sm:max-w-md sm:rounded-lg">
-            <form>
+            <div style={{position:"absolute", top:150, textAlign:"center",color: "red"}}>
+                {isError}
+            </div>
+            <form onSubmit={saveUser}>
               <div>
                 <label
                   htmlFor="name"
@@ -34,7 +79,10 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
+                    value={username}
+                    onChange={(e)=> setUsername(e.target.value)}
                     type="text"
+                    placeholder="User Name"
                     name="name"
                     className=" bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
                   />
@@ -49,7 +97,9 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
-                    type="text"
+                     value={firstName}
+                     onChange={(e)=>setFirstName(e.target.value)}
+                    type="text" 
                     name="firstName"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
                   />
@@ -64,6 +114,8 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
+                    value={lastName}
+                    onChange={(e)=> setLastName(e.target.value)}
                     type="text"
                     name="lastName"
                     className="form-control bg-opacity-50 block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
@@ -79,6 +131,8 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
+                   value={email}
+                   onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     name="email"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
@@ -94,6 +148,8 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)}
                     type="password"
                     name="password"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
@@ -109,6 +165,9 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
+                    value={confirmPassword}
+                    onChange= {(e)=>checkValidation(e)}
+                    placeholder="confirm password"
                     type="password"
                     name="password_confirmation"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
@@ -124,6 +183,9 @@ export default function Register() {
                 </label>
                 <div className="flex flex-col items-start">
                   <input
+                    value={address}
+                    onChange={(e)=>setAddress(e.target.value) }
+                    placeholder="Address"
                     type="text"
                     name="address"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
@@ -140,6 +202,8 @@ export default function Register() {
                 <div className="flex flex-col items-start">
                   <input
                     type="text"
+                    value={phoneNumber}
+                    onChange={(e)=>setphoneNumber(e.target.value)}
                     name="phoneNumber"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
                   />
@@ -148,7 +212,9 @@ export default function Register() {
               <div class="flex">
                 <div>
                   <div class="form-check pt-6">
-                    <input
+                    <input 
+                       value={gender}
+                       onChange={(e)=>setGender(e.target.value)}
                       class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-slate-600 checked:border-slate-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                       type="radio"
                       name="gender"
@@ -162,7 +228,9 @@ export default function Register() {
                     </label>
                   </div>
                   <div class="form-check">
-                    <input
+                    <input 
+                       value={gender}
+                       onChange={(e)=>setGender(e.target.value)}
                       class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-slate-600 checked:border-slate-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                       type="radio"
                       name="gender"
@@ -177,6 +245,8 @@ export default function Register() {
                   </div>
                   <div className="form-check">
                     <input
+                     value={gender}
+                     onChange={(e)=>setGender(e.target.value)}
                       className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-slate-600 checked:border-slate-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                       type="radio"
                       name="gender"
@@ -200,6 +270,30 @@ export default function Register() {
                   placeholderText="Your Birthday "
                 />
               </div>
+              <div className="mt-4">
+                                    <input
+                      type="file"
+                      id="preViewImg"
+                      hidden
+                      className="file-input"
+                      onChange={loadImage}
+                    />
+                    <label className="label-upload" htmlFor="preViewImg">
+                      Tải ảnh
+                      <i className="fas fa-upload" />
+                    </label>
+                    {
+                        preview ? (
+                            <figure className="image is-128x128">
+                                <img src={preview} alt="" />
+                            </figure>
+                        ):(
+                            ""
+                        )
+                    }
+                 
+                </div>
+              
 
               <div className="flex items-center justify-end mt-4">
                 <a

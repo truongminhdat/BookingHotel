@@ -7,18 +7,7 @@ import axios from "../../axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  Grid,
-  Box,
-  SFormControl,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Menu,
-  FormHelperText,
-} from "@mui/material";
+import "./modalUser.css";
 
 const ModalUser = ({ setShowModal, title }) => {
   const [users, setUsers] = useState({
@@ -31,41 +20,37 @@ const ModalUser = ({ setShowModal, title }) => {
     dayofbirth: "",
     gender: "",
     role: "",
-    image: "",
   });
-  
+  const [file, setFiles] = useState("");
+  const [preview, setPreview] = useState("");
+
   const handleChange = (e) => {
     setUsers((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
   console.log(users);
 
-
   const handleClick = async (e) => {
     e.preventDefault();
+    const formData = new formData();
+    formData.append("file", file);
     try {
-      await axios.post("http://localhost:8001/user/createuser", users);
+      await axios.post(
+        "http://localhost:8001/user/createuser",
+        users,
+        formData
+      );
       window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const [avatar, setAvatar] = useState();
-  const handleOnChangeImage = (e) => {
-    const file = e.target.files[0];
-    file.preview = URL.createObjectURL(file);
-    setAvatar(file);
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setFiles(image);
+    setPreview(URL.createObjectURL(image));
   };
-  
-  const onSubmit = async (data) => {
-    let response = await userApi.createPostUser({ ...data });
-    if (response && response.status === 200) {
-      toast.success("Create user success");
-    } else {
-      toast.error("Error create user");
-    }
-    // console.log("check data", data);
-  };
+  const saveUser = () => {};
 
   return (
     <>
@@ -86,7 +71,117 @@ const ModalUser = ({ setShowModal, title }) => {
               </button>
             </div>
             {/*body*/}
-            <div className="relative p-6 flex-auto bg-gray-800" >
+            <div className="col col-half contact-form">
+              <form action="">
+                <div className="row mt-8">
+                  <div className="col col-half">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="Username"
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="col col-half">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="FirstName"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+                <div className="row mt-8">
+                  <div className="col col-half">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="LastName"
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="col col-half">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="Email"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div className="row mt-8">
+                  <div className="col col-full">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="Address"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+                <div className="row mt-8">
+                  <div className="col col-full">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="PhoneNumber"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+                <div className="row mt-8">
+                  <div className="col col-half">
+                    <select
+                      name="gender"
+                      onChange={handleChange}
+                      className="form-control"
+                      placeholder="Giới tính"
+                    >
+                      <option hidden>Giới tính</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div className="col col-half">
+                    <select
+                      name="gender"
+                      onChange={handleChange}
+                      className="form-control"
+                      placeholder="Giới tính"
+                    >
+                      <option hidden>Role</option>
+                      <option>Admin</option>
+                      <option>User</option>
+                      <option>Staff</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row mt-8">
+                  <div className="col col-full">
+                    <input type="date" name="" className="form-control" />
+                  </div>
+                </div>
+                <div className="row mt-8">
+                  <div className="col col-full">
+                    <input
+                      type="file"
+                      id="preViewImg"
+                      hidden
+                      className="file-input"
+                      onChange={loadImage}
+                    />
+                    <label className="label-upload" htmlFor="preViewImg">
+                      Tải ảnh
+                      <i className="fas fa-upload" />
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            {/* <div className="relative p-6 flex-auto bg-gray-800">
               <section className="bg-gray-50 dark:bg-gray-800">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0 ">
                   <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -107,7 +202,6 @@ const ModalUser = ({ setShowModal, title }) => {
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
                           />
                         </div>
-                      
 
                         <div>
                           <label
@@ -126,9 +220,7 @@ const ModalUser = ({ setShowModal, title }) => {
                         </div>
 
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
                             First Name
                           </label>
                           <input
@@ -153,9 +245,7 @@ const ModalUser = ({ setShowModal, title }) => {
                           />
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
                             Address
                           </label>
                           <input
@@ -166,9 +256,7 @@ const ModalUser = ({ setShowModal, title }) => {
                           />
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
                             Phone Number
                           </label>
                           <input
@@ -179,9 +267,7 @@ const ModalUser = ({ setShowModal, title }) => {
                           />
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
                             Date of birth
                           </label>
                           <input
@@ -192,9 +278,7 @@ const ModalUser = ({ setShowModal, title }) => {
                           />
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                          >
+                          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Gender
                           </label>
                           <select
@@ -229,24 +313,28 @@ const ModalUser = ({ setShowModal, title }) => {
                           </select>
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-default Value-gray-900 dark:text-white"
-                          >
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-default Value-gray-900 dark:text-white">
                             Avatar
                           </label>
                           <input
                             type="file"
-                            name="image"
-                            onClick={()=>handleOnChangeImage}
+                            onChange={loadImage}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full mb-3 lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                           />
                         </div>
+                        {preview ? (
+                          <figure className="image">
+                            <img src={preview} alt="Image product" />
+                          </figure>
+                        ) : (
+                          ""
+                        )}
                       </form>
                     </div>
                   </div>
                 </div>
               </section>
-            </div>
+            </div> */}
             {/*footer*/}
             <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
               <button
