@@ -13,13 +13,14 @@ const ModalUser = ({ setShowModal, title }) => {
   const [users, setUsers] = useState({
     username: "",
     firstname: "",
-    lastName: "",
+    lastname: "",
     email: "",
     address: "",
     phonenumber: "",
     dayofbirth: "",
     gender: "",
     role: "",
+    avatar:"",
   });
   const [file, setFiles] = useState("");
   const [preview, setPreview] = useState("");
@@ -31,7 +32,7 @@ const ModalUser = ({ setShowModal, title }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const formData = new formData();
+    const formData = new FormData();
     formData.append("file", file);
     try {
       await axios.post(
@@ -76,16 +77,18 @@ const ModalUser = ({ setShowModal, title }) => {
                 <div className="row mt-8">
                   <div className="col col-half">
                     <input
+                    onChange={handleChange}
                       type="text"
-                      name=""
+                      name="username"
                       placeholder="Username"
                       className="form-control"
                     />
                   </div>
                   <div className="col col-half">
                     <input
+                    onChange={handleChange}
                       type="text"
-                      name=""
+                      name="firstname"
                       placeholder="FirstName"
                       className="form-control"
                     />
@@ -94,16 +97,18 @@ const ModalUser = ({ setShowModal, title }) => {
                 <div className="row mt-8">
                   <div className="col col-half">
                     <input
+                    onChange={handleChange}
                       type="text"
-                      name=""
+                      name="lastname"
                       placeholder="LastName"
                       className="form-control"
                     />
                   </div>
                   <div className="col col-half">
                     <input
+                    onChange={handleChange}
                       type="text"
-                      name=""
+                      name="email"
                       placeholder="Email"
                       className="form-control"
                     />
@@ -113,8 +118,9 @@ const ModalUser = ({ setShowModal, title }) => {
                 <div className="row mt-8">
                   <div className="col col-full">
                     <input
+                    onChange={handleChange}
                       type="text"
-                      name=""
+                      name="address"
                       placeholder="Address"
                       className="form-control"
                     />
@@ -123,8 +129,9 @@ const ModalUser = ({ setShowModal, title }) => {
                 <div className="row mt-8">
                   <div className="col col-full">
                     <input
+                    onChange={handleChange}
                       type="text"
-                      name=""
+                      name="phonenumber"
                       placeholder="PhoneNumber"
                       className="form-control"
                     />
@@ -136,7 +143,7 @@ const ModalUser = ({ setShowModal, title }) => {
                       name="gender"
                       onChange={handleChange}
                       className="form-control"
-                      placeholder="Giới tính"
+                      placeholder="Gender"
                     >
                       <option hidden>Giới tính</option>
                       <option>Male</option>
@@ -146,10 +153,10 @@ const ModalUser = ({ setShowModal, title }) => {
                   </div>
                   <div className="col col-half">
                     <select
-                      name="gender"
+                      name="role"
                       onChange={handleChange}
                       className="form-control"
-                      placeholder="Giới tính"
+                      placeholder="Choose Role"
                     >
                       <option hidden>Role</option>
                       <option>Admin</option>
@@ -160,7 +167,7 @@ const ModalUser = ({ setShowModal, title }) => {
                 </div>
                 <div className="row mt-8">
                   <div className="col col-full">
-                    <input type="date" name="" className="form-control" />
+                    <input type="date" name="dayofbirth" className="form-control" />
                   </div>
                 </div>
                 <div className="row mt-8">
@@ -169,6 +176,7 @@ const ModalUser = ({ setShowModal, title }) => {
                       type="file"
                       id="preViewImg"
                       hidden
+                      name="avatar"
                       className="file-input"
                       onChange={loadImage}
                     />
