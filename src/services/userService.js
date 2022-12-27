@@ -13,6 +13,10 @@ class UserApi {
     const url = "/hotel/getlimithotel?featured=1&limit=4";
     return axiosClient.get(url);
   };
+  updateUser = (data) => {
+    const url = "/auth/updateProfile";
+    return axiosClient.put(url, data);
+  }
 }
 const userApi = new UserApi();
 export default userApi;
