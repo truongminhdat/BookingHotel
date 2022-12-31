@@ -7,17 +7,16 @@ import ModalUpdateRoom from "./modal/modalUpdateRoom";
 
 const Room = () => {
   const [showModal, setShowModal] = React.useState(false);
-  const [updateModal, setUpdateModal] = React.useState(false)
+  const [updateModal, setUpdateModal] = React.useState(false);
   const [roles, setRole] = useState([]);
   const [rooms, setRoom] = useState([]);
   const [price, setPrice] = useState([]);
-
+  const [activeId, setactiveId] = useState([]);
   useEffect(() => {
     const fecthAllRoom = async () => {
       try {
         const { data } = await axios.get("http://localhost:8001/room/getroom");
         setRoom(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -137,7 +136,10 @@ const Room = () => {
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <button className="pr-2">
                         <svg
-                        onClick={()=>{setUpdateModal(true)}}
+                          onClick={() => {
+                            setactiveId(room.id);
+                            setUpdateModal(true);
+                          }}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -175,6 +177,7 @@ const Room = () => {
                 ))}
               </tbody>
             </table>
+
             <>
               {showModal ? (
                 <>
@@ -189,6 +192,7 @@ const Room = () => {
                   <ModalUpdateRoom
                     onClick={() => !updateModal}
                     setUpdateModal={setUpdateModal}
+                    id={activeId}
                   />
                 </>
               ) : null}

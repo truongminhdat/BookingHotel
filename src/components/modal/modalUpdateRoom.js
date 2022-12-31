@@ -3,9 +3,9 @@ import { useNavigate, useLocation } from "react-router";
 import axios from "../../axios";
 import Room from "../Room";
 
-const ModalUpdateRoom = ({ setUpdateModal }) => {
+const ModalUpdateRoom = ({ setUpdateModal, id }) => {
   const [rooms, setRoom] = useState({
-    id:`${Room.id}`,
+    id: id,
     title: "",
     price: "",
     desc: "",
@@ -17,24 +17,21 @@ const ModalUpdateRoom = ({ setUpdateModal }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const handleChange = (e) => {
     setRoom((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
-  console.log(rooms);
 
   const handleClick = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:8001/room/updateroom/?id=${Room.id}`,
+        `http://localhost:8001/room/updateroom/?id=${id}`,
         rooms
-        // "http://localhost:8001/room/updateroom",rooms
       );
     } catch (error) {
       console.log(error);
     }
-    // window.location.reload();
+    window.location.reload();
   };
 
   return (
@@ -48,7 +45,6 @@ const ModalUpdateRoom = ({ setUpdateModal }) => {
               <h3 className="text-3xl font-semibold text-white ">
                 Update Room
               </h3>
-           
             </div>
             {/*body*/}
             <div className="relative p-6 flex-auto bg-gray-800">
