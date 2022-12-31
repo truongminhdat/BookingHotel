@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "../../axios";
-import roomApi from "../../services/roomService";
-import roomTypeApi from "../../services/roomTypeService";
+import hotelApi from "../../services/hotelService";
 
-const ModalRoom = ({ setShowModal }) => {
-  const [room, setRoom] = useState({
+const ModalHotel = ({ setShowModal }) => {
+  const [hotel, setHotel] = useState({
+    name: "",
     title: "",
-    price: "",
-    desc:"",
-    maxPeople:"",
-    roomNumber:"",
-    image: "",
+    type: "",
+    title: "",
+    city: "",
+    address: "",
+    distance: "",
+    cheaperPrice: "",
+    photo: "",
+    description: "",
+    rating: "",
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setRoom((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+    setHotel((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
-  console.log(room);
+  console.log(hotel);
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8001/room/createroom", room);
+      await axios.post("http://localhost:8001/hotel/createHotel", hotel);
     } catch (error) {
       console.log(error);
     }
@@ -39,15 +43,15 @@ const ModalRoom = ({ setShowModal }) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none focus:outline-none bg-gray-800">
             {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-3xl font-semibold text-white ">Add Room</h3>
-              {/* <button
+              <h3 className="text-3xl font-semibold text-white ">Add Hotel</h3>
+              <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(true)}
               >
                 <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                   ×
                 </span>
-              </button> */}
+              </button>
             </div>
             {/*body*/}
             <div className="relative p-6 flex-auto bg-gray-800">
@@ -57,72 +61,130 @@ const ModalRoom = ({ setShowModal }) => {
                     <div className="lg:p-7 space-y-4 md:space-y-5 sm:p-4">
                       <form className=" space-y-4 md:space-y-2" action="#">
                         <div>
-                          <label
-                            className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Room Name
+                          <label className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Hotel Name
                           </label>
                           <input
-                            name="title"
+                            name="name"
                             type="text"
                             onChange={handleChange}
-                            id="title"
+                            id="name"
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
+                          />
+                        </div>
+                        <div>
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Title
+                          </label>
+                          <input
+                            type="text"
+                            name="title"
+                            onChange={handleChange}
+                            id="title"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                           />
                         </div>
 
                         <div>
                           <label
+                            htmlFor="email"
+                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Address
+                          </label>
+                          <input
+                            type="text"
+                            name="address"
+                            onChange={handleChange}
+                            id="address"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            City
+                          </label>
+                          <textarea
+                            type="text"
+                            name="city"
+                            onChange={handleChange}
+                            id="city"
+                            className=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Distance
+                          </label>
+                          <textarea
+                            type="text"
+                            name="distance"
+                            onChange={handleChange}
+                            id="distance"
+                            className=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Description
+                          </label>
+                          <textarea
+                            type="text"
+                            name="description"
+                            onChange={handleChange}
+                            id="description"
+                            className=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Rating
+                          </label>
+                          <textarea
+                            type="text"
+                            name="rating"
+                            onChange={handleChange}
+                            id="rating"
+                            className=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
+                          />
+                        </div>
+
+                        <div>
+                          <label
+                            htmlFor="countries"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Hotel type
+                          </label>
+                          <select
+                            name="hotelType"
+                            onChange={handleChange}
+                            placeholder="Choose a type"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          >
+                            <option>type 1</option>
+                            <option>type 2</option>
+                            <option>type 3</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label
                             htmlFor="currency-field"
                             className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                            name="price"
+                            onChange={handleChange}
                           >
                             Price
                           </label>
                           <input
                             type="number"
-                            name="price"
+                            name="cheaperPrice"
                             onChange={handleChange}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                          />
-                        </div>
-                        <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Max People
-                          </label>
-                          <input
-                            type="number"
-                            name="maxPeople"
-                            onChange={handleChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                          />
-                        </div>
-                        <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Room Number
-                          </label>
-                          <input
-                            type="number"
-                            name="roomNumber"
-                            onChange={handleChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                          />
-                        </div>
-                        <div>
-                          <label
-                            className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Description
-                          </label>
-                          <input
-                            name="desc"
-                            type="text"
-                            onChange={handleChange}
-                            id="title"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
                           />
                         </div>
                         <div>
@@ -169,4 +231,5 @@ const ModalRoom = ({ setShowModal }) => {
     </>
   );
 };
-export default ModalRoom;
+
+export default ModalHotel;

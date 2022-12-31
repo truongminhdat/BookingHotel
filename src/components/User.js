@@ -34,17 +34,7 @@ const User = () => {
       console.log(error);
     }
   };
-  // useEffect(() => {
-  //   const fecthAllUsers = async () => {
-  //     try {
-  //       const res = await axios.get("http://localhost:8001/auth/getuser")
-  //       setUsers(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fecthAllUsers();
-  // }, []);
+  
 
   return (
     <div className="flex flex-col">

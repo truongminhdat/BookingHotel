@@ -19,6 +19,7 @@ import List from "./page/list/List";
 import Home from "./page/home/Home.jsx";
 import PasswordReset from "./page/password/PasswordReset";
 import ForgotPassword from "./page/password/ForgotPassword";
+import AdHotel from "./Hotel"
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="user" element={<User />}></Route>
           <Route path="role" element={<Role />}></Route>
           <Route path="roomtypeAdmin" element={<RoomTypeAdmin />}></Route>
+          <Route path="adhotel" element={<AdHotel />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
