@@ -17,6 +17,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     icon: <HiOutlineViewGrid />,
   },
   {
+    key: "hotel",
+    label: "Hotels",
+    path: "/adhotel",
+    icon: <HiOutlineCube />,
+  },
+  {
     key: "products",
     label: "Room",
     path: "/room",

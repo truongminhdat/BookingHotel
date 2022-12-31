@@ -1,23 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import roleApi from "../services/roleService";
 import ModalRoom from "./modal/modalRoom";
 import axios from "../axios";
+import roomApi from "../services/roomService";
+import ModalUpdateRoom from "./modal/modalUpdateRoom";
 
 const Room = () => {
   const [showModal, setShowModal] = React.useState(false);
+  const [updateModal, setUpdateModal] = React.useState(false);
   const [roles, setRole] = useState([]);
-  const [room, setRoom] = useState([]);
-
+  const [rooms, setRoom] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [activeId, setactiveId] = useState([]);
   useEffect(() => {
     const fecthAllRoom = async () => {
       try {
-        const res = axios.get("http://localhost:8001/room");
-        setRoom(res.data);
+        const { data } = await axios.get("http://localhost:8001/room/getroom");
+        setRoom(data);
       } catch (error) {
         console.log(error);
       }
     };
-  });
+    fecthAllRoom();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8001/room/deleteroom/?id=${id}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col">
@@ -51,21 +65,14 @@ const Room = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Title
+                    Max People
                   </th>
 
                   <th
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Room Convenient
-                  </th>
-
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Room type
+                    Description
                   </th>
 
                   <th
@@ -73,6 +80,13 @@ const Room = () => {
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Price
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Room Number
                   </th>
 
                   <th
@@ -91,13 +105,41 @@ const Room = () => {
                 </tr>
               </thead>
               <tbody>
-                {roles.map((post) => (
-                  <tr key={post.id}>
-                    <td>{post.id}</td>
-                    <td>{post.username}</td>
+                {rooms.map((room) => (
+                  <tr
+                    className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                    key={room.id}
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {room.id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {room.title}
+                    </td>
+
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {room.maxPeople}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {room.desc}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {room.price}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {room.roomNumber}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <img src={rooms.url} className="image" />
+                      {room.avatar}
+                    </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <button className="pr-2">
                         <svg
+                          onClick={() => {
+                            setactiveId(room.id);
+                            setUpdateModal(true);
+                          }}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -111,9 +153,11 @@ const Room = () => {
                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                           />
                         </svg>
+                        {updateModal && <ModalUpdateRoom />}
                       </button>
                       <button>
                         <svg
+                          onClick={() => handleDelete(room.id)}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -133,12 +177,22 @@ const Room = () => {
                 ))}
               </tbody>
             </table>
+
             <>
               {showModal ? (
                 <>
                   <ModalRoom
                     onClick={() => !showModal}
                     setShowModal={setShowModal}
+                  />
+                </>
+              ) : null}
+              {updateModal ? (
+                <>
+                  <ModalUpdateRoom
+                    onClick={() => !updateModal}
+                    setUpdateModal={setUpdateModal}
+                    id={activeId}
                   />
                 </>
               ) : null}

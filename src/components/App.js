@@ -19,8 +19,13 @@ import List from "./page/list/List";
 import Home from "./page/home/Home.jsx";
 import PasswordReset from "./page/password/PasswordReset";
 import ForgotPassword from "./page/password/ForgotPassword";
+<<<<<<< HEAD
 import Profile from "./page/authentation/profile/Profile";
 import ChangePassword from "./page/changePassword/ChangePassword";
+=======
+import AdHotel from "./Hotel"
+
+>>>>>>> a8289d7948f679f5ab0f41ad43b4de2b6926a608
 function App() {
   return (
     <BrowserRouter>
@@ -52,6 +57,7 @@ function App() {
           <Route path="user" element={<User />}></Route>
           <Route path="role" element={<Role />}></Route>
           <Route path="roomtypeAdmin" element={<RoomTypeAdmin />}></Route>
+          <Route path="adhotel" element={<AdHotel />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
