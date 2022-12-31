@@ -10,6 +10,7 @@ import { AuthContext } from "../../helpers/AuthContext";
 const Navbar = () => {
     const [authState, setAuthState]  = useState(false);
     const [email, setEmail] = useState('');
+    const [id, setId] = useState('');
     useEffect(() => {
         axios.get('http://localhost:8001/auth/auth',{
             headers: {
@@ -21,6 +22,7 @@ const Navbar = () => {
             }else{
                 setAuthState(true);
                 setEmail(response.data.email);
+                setId(response.data.id)
             }
         })
     })
@@ -44,8 +46,15 @@ const Navbar = () => {
             </div>
 
                        
-                )}{
-                    <span>{email}</span>
+                )}
+                {
+                    <div>
+                         <Link to={`/profile/${id}`}><span>{email}</span></Link> 
+                    </div>
+                  
+                    
+                    
+                   
                 }
                  </div>
                 </AuthContext.Provider>

@@ -3,21 +3,26 @@ import DatePicker from "react-datepicker";
 import "../../css/bgImg.css";
 
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+
+
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [address, setAddress] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState(""); 
   const [file, setFiles] = useState("");
   const [preview, setPreview] = useState("");
   const [isError, setIsError] = useState("");
+  let navigate = useNavigate();
 
   const loadImage = (e) => {
     const file = e.target.files[0];
@@ -26,20 +31,50 @@ export default function Register() {
   };
   const saveUser = async(e) => {
     e.preventDefault();
+    // let response = await register({
+    //   email, 
+    //   password,
+    //   username, 
+    //   firstName,
+    //   lastName,
+    //   address, 
+    //   gender, 
+    //   phoneNumber, 
+    //   file, 
+    //   selectedDate,
+
+
+    // })
     const formData = new FormData();
-    formData.append("file",file);
-    formData.append("email",email);
+    formData.append("email", email);
+    formData.append("password", password);
     formData.append("username",username);
-    formData.append("lastName",lastName);
     formData.append("firstName",firstName);
-    formData.append("address", address);
-    formData.append("phoneNumber", phoneNumber);
-    formData.append("password",password);
+    formData.append("lastName",lastName);
+    formData.append("address",address);
+    formData.append("phoneNumber",phoneNumber);
+    formData.append("gender",gender);
+    formData.append("selectedDate",selectedDate);
+    formData.append("file",file);
+    try {
+      await axios.post("http://localhost:8001/auth/signup", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+    
+
+
+   
 
 
   }
   const checkValidation = (e) => {
-    setconfirmPassword(e.target.value);
+    setConfirmPassword(e.target.value);
     if(password != confirmPassword){
         setIsError("Confirm password should be match with password !")
     }
@@ -48,6 +83,7 @@ export default function Register() {
     }
 
   }
+  
   return ( 
     <div>
       <div className="background-image ">
@@ -176,7 +212,7 @@ export default function Register() {
               </div>
               <div className="mt-4">
                 <label
-                  htmlFor="password_confirmation"
+                  htmlFor="address"
                   className="block tracking-wider text-sm font-medium text-gray-900 undefined"
                 >
                   Address
@@ -203,13 +239,13 @@ export default function Register() {
                   <input
                     type="text"
                     value={phoneNumber}
-                    onChange={(e)=>setphoneNumber(e.target.value)}
+                    onChange={(e)=>setPhoneNumber(e.target.value)}
                     name="phoneNumber"
                     className="bg-opacity-50 form-control block w-full px-2 py-0.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-slate-500 focus:outline-none"
                   />
                 </div>
               </div>
-              <div class="flex">
+              {/* <div class="flex">
                 <div>
                   <div class="form-check pt-6">
                     <input 
@@ -260,6 +296,10 @@ export default function Register() {
                     </label>
                   </div>
                 </div>
+              </div> */}
+              <div className="mt-4">
+                <label>Gender</label>
+                <input type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/>
               </div>
               <div className="mt-4 ">
                 <DatePicker
@@ -316,3 +356,4 @@ export default function Register() {
     </div>
   );
 }
+
