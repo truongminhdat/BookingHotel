@@ -4,6 +4,7 @@ import ModalRoom from "./modal/modalRoom";
 import axios from "../axios";
 import roomApi from "../services/roomService";
 import ModalUpdateRoom from "./modal/modalUpdateRoom";
+import { Link } from "react-router-dom";
 
 const Room = () => {
   const [showModal, setShowModal] = React.useState(false);
@@ -52,27 +53,28 @@ const Room = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left disabled"
                   >
-                    id
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Room Name
+                    Image Room
                   </th>
 
                   <th
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Max People
+                    number of beds
                   </th>
 
                   <th
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Description
+                    number of adults
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    number of children
                   </th>
 
                   <th
@@ -80,20 +82,6 @@ const Room = () => {
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Price
-                  </th>
-
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Room Number
-                  </th>
-
-                  <th
-                    scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Avatar
                   </th>
 
                   <th
@@ -111,50 +99,44 @@ const Room = () => {
                     key={room.id}
                   >
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {room.id}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {room.title}
+                      <img src={room.url} className="h-14" />
                     </td>
 
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {room.maxPeople}
+                      {room.numberRoom}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {room.desc}
+                      {room.adult}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {room.children}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {room.price}
                     </td>
+
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {room.roomNumber}
-                    </td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <img src={rooms.url} className="image" />
-                      {room.avatar}
-                    </td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <button className="pr-2">
-                        <svg
-                          onClick={() => {
-                            setactiveId(room.id);
-                            setUpdateModal(true);
-                          }}
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                          />
-                        </svg>
-                        {updateModal && <ModalUpdateRoom />}
-                      </button>
+                      <Link to={`/edit/${room.id}`}>
+                        {" "}
+                        <button className="pr-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                            />
+                          </svg>
+                          {updateModal && <ModalUpdateRoom />}
+                        </button>
+                      </Link>
+
                       <button>
                         <svg
                           onClick={() => handleDelete(room.id)}

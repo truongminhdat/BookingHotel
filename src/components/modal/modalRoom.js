@@ -5,31 +5,55 @@ import roomApi from "../../services/roomService";
 import roomTypeApi from "../../services/roomTypeService";
 
 const ModalRoom = ({ setShowModal }) => {
-  const [room, setRoom] = useState({
-    title: "",
-    price: "",
-    desc:"",
-    maxPeople:"",
-    roomNumber:"",
-    image: "",
-  });
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [adult, setAdult] = useState("");
+  const [file, setFiles] = useState("");
+  const [aceages, setAcreages] = useState("");
+  const [children, setChildren] = useState("");
+  const [numberRoom, setNumberRoom] = useState("");
+  const [preview, setPreview] = useState("");
+  const loadImage = (e) => {
+    const file = e.target.files[0];
+    setFiles(file);
+    setPreview(URL.createObjectURL(file));
+  };
 
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setRoom((pre) => ({ ...pre, [e.target.name]: e.target.value }));
-  };
-  console.log(room);
-
-  const handleClick = async (e) => {
+  const saveUser = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("adult", adult);
+    formData.append("children", children);
+    formData.append("numberRoom", numberRoom);
+    formData.append("aceages", aceages);
+
+    formData.append("file", file);
+
     try {
-      await axios.post("http://localhost:8001/room/createroom", room);
+      await axios.post("http://localhost:8001/room/createRoom", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      navigate("/room");
     } catch (error) {
       console.log(error);
     }
-    window.location.reload();
   };
+
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post("http://localhost:8001/room/createroom");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   window.location.reload();
+  // };
 
   return (
     <>
@@ -57,15 +81,13 @@ const ModalRoom = ({ setShowModal }) => {
                     <div className="lg:p-7 space-y-4 md:space-y-5 sm:p-4">
                       <form className=" space-y-4 md:space-y-2" action="#">
                         <div>
-                          <label
-                            className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Room Name
+                          <label className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            title
                           </label>
                           <input
                             name="title"
                             type="text"
-                            onChange={handleChange}
+                            onChange={(e) => setTitle(e.target.value)}
                             id="title"
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
                           />
@@ -81,63 +103,78 @@ const ModalRoom = ({ setShowModal }) => {
                           <input
                             type="number"
                             name="price"
-                            onChange={handleChange}
+                            onChange={(e) => setPrice(e.target.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                           />
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Max People
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Number Room
                           </label>
                           <input
                             type="number"
                             name="maxPeople"
-                            onChange={handleChange}
+                            onChange={(e) => setNumberRoom(e.target.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                           />
                         </div>
                         <div>
-                          <label
-                            className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Room Number
+                          <label className="block mb-2 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Adult
                           </label>
                           <input
                             type="number"
                             name="roomNumber"
-                            onChange={handleChange}
+                            onChange={(e) => setAdult(e.target.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                           />
                         </div>
                         <div>
-                          <label
-                            className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Description
+                          <label className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            children
                           </label>
                           <input
                             name="desc"
                             type="text"
-                            onChange={handleChange}
+                            onChange={(e) => setChildren(e.target.value)}
                             id="title"
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
                           />
                         </div>
                         <div>
-                          <label
-                            htmlFor="roomImg"
-                            className="block mb-2 md:mb-1 text-sm font-medium text-default Value-gray-900 dark:text-white"
-                          >
-                            Image
+                          <label className="block lg:mb-3 md:mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            acreages
                           </label>
                           <input
-                            type="file"
-                            name="image"
-                            onChange={handleChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full mb-3 lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                            name="desc"
+                            type="text"
+                            onChange={(e) => setAcreages(e.target.value)}
+                            id="title"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full lg:p-2.5 md:p-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white "
                           />
+                        </div>
+                        <div>
+                          <div className="col col-full">
+                            <input
+                              type="file"
+                              id="preViewImg"
+                              hidden
+                              name="avatar"
+                              className="file-input"
+                              onChange={loadImage}
+                            />
+                            <label className="text-black" htmlFor="preViewImg">
+                              Tải ảnh
+                              <i className="fas fa-upload" />
+                            </label>
+                            {preview ? (
+                              <figure className="image is-128x128">
+                                <img src={preview} alt="" />
+                              </figure>
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
                       </form>
                     </div>
@@ -157,7 +194,7 @@ const ModalRoom = ({ setShowModal }) => {
               <button
                 className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3  hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 rounded-md hover:bg-emerald-900 "
                 type="button"
-                onClick={handleClick}
+                onClick={saveUser}
               >
                 Save Changes
               </button>

@@ -4,15 +4,9 @@ import axios from "../../axios";
 import Room from "../Room";
 
 const ModalUpdateRoom = ({ setUpdateModal, id }) => {
-  const [rooms, setRoom] = useState({
-    id: id,
-    title: "",
-    price: "",
-    desc: "",
-    maxPeople: "",
-    roomNumber: "",
-    image: "",
-  });
+  // const [title, setTitle] = useState("");
+  // const [file, setFile] = useState("");
+  // const [preview, setPreview] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,10 +18,7 @@ const ModalUpdateRoom = ({ setUpdateModal, id }) => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(
-        `http://localhost:8001/room/updateroom/?id=${id}`,
-        rooms
-      );
+      await axios.put(`http://localhost:8001/room/updateroom/?id=${id}`, rooms);
     } catch (error) {
       console.log(error);
     }
