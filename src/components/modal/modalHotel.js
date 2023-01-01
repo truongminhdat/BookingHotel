@@ -6,9 +6,7 @@ import hotelApi from "../../services/hotelService";
 const ModalHotel = ({ setShowModal }) => {
   const [hotel, setHotel] = useState({
     name: "",
-    title: "",
     type: "",
-    title: "",
     city: "",
     address: "",
     distance: "",

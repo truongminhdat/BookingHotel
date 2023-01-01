@@ -19,13 +19,13 @@ import List from "./page/list/List";
 import Home from "./page/home/Home.jsx";
 import PasswordReset from "./page/password/PasswordReset";
 import ForgotPassword from "./page/password/ForgotPassword";
-<<<<<<< HEAD
+
 import Profile from "./page/authentation/profile/Profile";
 import ChangePassword from "./page/changePassword/ChangePassword";
-=======
-import AdHotel from "./Hotel"
 
->>>>>>> a8289d7948f679f5ab0f41ad43b4de2b6926a608
+import AdHotel from "./Hotel";
+import EditRoom from "./modal/editRoom";
+
 function App() {
   return (
     <BrowserRouter>
@@ -52,9 +52,11 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />}></Route>
           <Route path="Room" element={<Room />}></Route>
+          <Route path="edit/:id" element={<EditRoom />}></Route>
           <Route path="orders" element={<Room />}></Route>
           {/* <Route path="home" element={<Home />}></Route> */}
           <Route path="user" element={<User />}></Route>
+
           <Route path="role" element={<Role />}></Route>
           <Route path="roomtypeAdmin" element={<RoomTypeAdmin />}></Route>
           <Route path="adhotel" element={<AdHotel />}></Route>
