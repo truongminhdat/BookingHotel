@@ -4,6 +4,7 @@ import axios from "../../axios";
 import Room from "../Room";
 
 const ModalUpdateRoom = ({ setUpdateModal, id }) => {
+  const [rooms, setRoom] = useState()
   // const [title, setTitle] = useState("");
   // const [file, setFile] = useState("");
   // const [preview, setPreview] = useState("");

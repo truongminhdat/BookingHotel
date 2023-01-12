@@ -19,13 +19,10 @@ import List from "./page/list/List";
 import Home from "./page/home/Home.jsx";
 import PasswordReset from "./page/password/PasswordReset";
 import ForgotPassword from "./page/password/ForgotPassword";
-<<<<<<< HEAD
 import Profile from "./page/authentation/profile/Profile";
 import ChangePassword from "./page/changePassword/ChangePassword";
-
 import AdHotel from "./Hotel";
 import EditRoom from "./modal/editRoom";
-import AdHotel from "./Hotel"
 import AdminLogin from "./AdminLogin";
 
 function App() {
