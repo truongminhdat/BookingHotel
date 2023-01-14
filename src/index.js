@@ -4,6 +4,7 @@ import App from "./components/App";
 
 import { AuthProvider } from "./list/context/AuthProvider";
 import "./index.css";
+import Admin from "./components/Admin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -11,6 +12,7 @@ root.render(
     <AuthProvider>
       <App />
     </AuthProvider>
+    <Admin />
   </React.StrictMode>
 );
 

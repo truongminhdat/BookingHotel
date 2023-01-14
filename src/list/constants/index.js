@@ -35,40 +35,10 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     icon: <HiOutlineShoppingCart />,
   },
   {
-    key: "customers",
-    label: "Customers",
-    path: "/customers",
-    icon: <HiOutlineUsers />,
-  },
-  {
-    key: "transactions",
-    label: "Transactions",
-    path: "/transactions",
-    icon: <HiOutlineDocumentText />,
-  },
-  {
-    key: "messages",
-    label: "Messages",
-    path: "/messages",
-    icon: <HiOutlineAnnotation />,
-  },
-  {
-    key: "user",
-    label: "User",
-    path: "/user",
-    icon: <HiOutlineAnnotation />,
-  },
-  {
-    key: "role",
-    label: "Role",
-    path: "/role",
-    icon: <HiOutlineAnnotation />,
-  },
-  {
-    key: "roomType",
-    label: "roomTypeAdmin",
-    path: "/roomTypeAdmin",
-    icon: <HiOutlineAnnotation />,
+    key: "categories",
+    label: "Categories",
+    path: "/categories",
+    icon: <HiOutlineCube />,
   },
 ];
 
