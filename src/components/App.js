@@ -6,7 +6,7 @@ import Layout from "./admin/Layout";
 import Dashboard from "./pages/Dashboard";
 import Login from "./page/login/Login";
 import Room from "./Room";
-import User from "./User";
+import User from "./admin/user/User";
 import TrangChu from "./trangchu/index";
 import RoomDetail from "./trangchu/roomDetail";
 import PayMent from "./payment";

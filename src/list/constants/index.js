@@ -16,12 +16,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/layout",
     icon: <HiOutlineViewGrid />,
   },
-  {
-    key: "hotel",
-    label: "Hotels",
-    path: "/adhotel",
-    icon: <HiOutlineCube />,
-  },
+
   {
     key: "products",
     label: "Room",
@@ -38,6 +33,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     key: "categories",
     label: "Categories",
     path: "/categories",
+    icon: <HiOutlineCube />,
+  },
+  {
+    key: "users",
+    label: "Users",
+    path: "/user",
     icon: <HiOutlineCube />,
   },
 ];

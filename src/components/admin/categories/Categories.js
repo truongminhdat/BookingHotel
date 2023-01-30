@@ -1,26 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Categories = () => {
+  let navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+  const handleChange = () => {
+    navigate("/categories/addCategories");
+  };
+  useEffect(() => {
+    const fetchAllUser = async () => {
+      try {
+        let { data } = await axios.get(
+          "http://localhost:8001/categories/getAllCategories"
+        );
+        setCategories(data.getAllCategories);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllUser();
+  }, []);
+  console.log("check data hello word", categories);
   return (
-    <div className="flex flex-col">
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <button className="bg-orange-500 ml-10 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          <Link to="addCategories">AddCategories</Link>
-        </button>
-        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="overflow-hidden">
+    <div className="container mt-5">
+      <div className="columns">
+        <div className="column is-centered">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+            onClick={handleChange}
+          >
+            AddCategories
+          </button>
+          <table className="table is-striped is-bordered is-fullwidth mt-2">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
             <tbody>
-              <table class="table-fixed text-center">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
+              {categories.map((categories) => (
+                <tr>
+                  <td>{categories.name}</td>
+                  <td>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                      Edit
+                    </button>
+                    <button className="ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
-          </div>
+          </table>
         </div>
       </div>
     </div>
