@@ -31,6 +31,7 @@ const ListUser = () => {
     };
     fetchAllUser();
   }, [page, keyword]);
+  
   const handlePageClick = ({ selected }) => {
     setPage(selected);
   };

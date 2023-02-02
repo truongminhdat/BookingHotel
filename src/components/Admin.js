@@ -29,7 +29,7 @@ import AddCategories from "./admin/categories/AddCategories";
 import Categories from "./admin/categories/Categories";
 import AddUser from "./admin/user/AddUser";
 import ListUser from "./admin/user/ListUser";
-
+import EditCategories from "./admin/categories/EditCategories";
 
 function Admin() {
   return (
@@ -51,7 +51,10 @@ function Admin() {
             path="categories/addCategories"
             element={<AddCategories />}
           ></Route>
-
+          <Route
+            path="categories/editCategories/"
+            element={<EditCategories />}
+          ></Route>
           <Route path="role" element={<Role />}></Route>
           <Route path="roomtypeAdmin" element={<RoomTypeAdmin />}></Route>
           <Route path="adhotel" element={<AdHotel />}></Route>
