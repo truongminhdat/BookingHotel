@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 function AdminLogin() {
+  const [name, setName] = useState("")
   const [data, setData] = useState({
     email:"",
     password:"",
@@ -16,9 +17,8 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8001/auth/adminLogin";
+      const url = `http://localhost:8001/auth/adminLogin?name=`;
       const {data: res} = await axios.post(url, data)
-
       sessionStorage.setItem("token",res.accessToken)
       window.location = "/layout"
     } catch (error) {
@@ -29,7 +29,6 @@ function AdminLogin() {
       }
     }
   }
-  
   return (
 <section className="h-screen">
   <div className="px-6 py-12 h-full ">
@@ -40,6 +39,7 @@ function AdminLogin() {
           <div className="mb-6">
             <input
               type="text"
+              name="email"
               className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none shadow-md"
               placeholder="Email address"
               onChange={handleChange}

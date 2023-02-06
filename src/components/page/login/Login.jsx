@@ -63,17 +63,7 @@ export default function Login() {
             if (e.response) {
                 setMsg(e.response.data.msg);
             }
-
         }
-      
-      
-        
-
-
-
-
-
-
     }
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
