@@ -27,6 +27,10 @@ const Navbar = () => {
         })
     })
 
+
+    const Logout = () => {
+        localStorage.removeItem('accessToken')
+    }
     
   
     return(
@@ -50,6 +54,7 @@ const Navbar = () => {
                 {
                     <div>
                          <Link to={`/profile/${id}`}><span>{email}</span></Link> 
+                         <span onClick={Logout}>Logout</span>
                     </div>
                   
                     
