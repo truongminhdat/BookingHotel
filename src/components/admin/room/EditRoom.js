@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
-const AddRoom = () => {
+const EditRoom = () => {
   const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -11,6 +11,9 @@ const AddRoom = () => {
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
   const [categoryId, setCategory] = useState("");
+
+  const { id } = useParams();
+  console.log("check data id", id);
   let navigate = useNavigate();
 
   const loadImage = (e) => {
@@ -23,17 +26,39 @@ const AddRoom = () => {
     const fetchAllUser = async () => {
       try {
         let { data } = await axios.get(
-          "http://localhost:8001/categories/getAllCategories"
+          `http://localhost:8001/room/getRoomById?id=${id}`
         );
-        setCategories(data.getAllCategories);
+
+        setTitle(data.title);
+        setPrice(data.price);
+        setDiscount(data.discount);
+        setDesc(data.desc);
+        setCategory(data.categoryId);
+        setPreview(data.url);
       } catch (error) {
         console.log(error);
       }
     };
     fetchAllUser();
   }, []);
+  useEffect(() => {
+    const fetchAllCategories = async () => {
+      try {
+        let { data } = await axios.get(
+          `http://localhost:8001/categories/getAllCategories`
+        );
 
-  const saveRoom = async (e) => {
+        setCategories(data.getAllCategories);
+
+        console.log("check data", data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllCategories();
+  }, []);
+
+  const updateRoom = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -45,11 +70,15 @@ const AddRoom = () => {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:8001/room/createRoom", formData, {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      });
+      await axios.patch(
+        `http://localhost:8001/room/updateRoom?id=${id}`,
+        formData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
       navigate("/room");
     } catch (error) {
       console.log(error);
@@ -61,7 +90,7 @@ const AddRoom = () => {
       <form>
         <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-400 before:mt-0.5 after:flex-1 after:border-t after:border-gray-400 after:mt-0.5">
           <p className="text-center font-semibold mx-4 mb-0 text-slate-500">
-            Add Room
+            Edit Room
           </p>
         </div>
 
@@ -73,6 +102,7 @@ const AddRoom = () => {
             placeholder="Title"
             name="title"
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
         </div>
 
@@ -84,6 +114,7 @@ const AddRoom = () => {
             placeholder="Price"
             name="price"
             onChange={(e) => setPrice(e.target.value)}
+            value={price}
           />
         </div>
         <div className="mb-6">
@@ -94,6 +125,7 @@ const AddRoom = () => {
             placeholder="discount"
             name="discount"
             onChange={(e) => setDiscount(e.target.value)}
+            value={discount}
           />
         </div>
         <div className="mb-6">
@@ -104,6 +136,7 @@ const AddRoom = () => {
             placeholder="description"
             name="description"
             onChange={(e) => setDesc(e.target.value)}
+            value={desc}
           />
         </div>
         <div className="mb-6">
@@ -116,11 +149,16 @@ const AddRoom = () => {
           <select
             id="countries"
             onChange={(e) => setCategory(e.target.value)}
+            value={categoryId}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            {categories.map((categories) => (
-              <option value={categories.id}>{categories.name}</option>
-            ))}
+            {categories &&
+              categories.length > 0 &&
+              categories.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
           </select>
         </div>
         <div className="mb-6">
@@ -139,10 +177,10 @@ const AddRoom = () => {
         <div className="text-center lg:text-left mt-10">
           <button
             type="button"
-            onClick={saveRoom}
+            onClick={updateRoom}
             className="inline-block px-7 py-3 bg-slate-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-slate-800 hover:shadow-lg focus:bg-slate-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-800  active:shadow-lg transition duration-300 ease-in-out hover:scale-110"
           >
-            Add Room
+            Update Room
           </button>
         </div>
       </form>
@@ -151,4 +189,4 @@ const AddRoom = () => {
   );
 };
 
-export default AddRoom;
+export default EditRoom;

@@ -24,3 +24,27 @@
     cursor: pointer;
     color: #003580;
 }
+.logo{
+    color: black;
+}
+.cart{
+  cursor: pointer;
+  float: left;
+  margin-right: 2px;
+}
+.cart span:nth-child(1){
+    font-size:1.5rem;
+    color: black;
+}
+.cart span:nth-child(2){
+   padding: 0 3px;
+   background-color: red;
+   color: #1755d1;
+   font-weight: bold;
+   border-radius: 5px;
+   position: relative;
+   top: -15px;
+}
+.logout{
+   color: #02132b;
+}
