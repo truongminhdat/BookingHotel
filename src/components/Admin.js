@@ -37,7 +37,7 @@ function Admin() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />}></Route>
-
+          <Route path="adminlogin" element={<AdminLogin />}></Route>
           <Route path="Room" element={<Room />}></Route>
           <Route path="addRoom" element={<AddRoom />}></Route>
           <Route path="edit/:id" element={<EditRoom />}></Route>
@@ -45,7 +45,7 @@ function Admin() {
 
           {/* <Route path="home" element={<Home />}></Route> */}
           <Route path="user" element={<ListUser />}></Route>
-          <Route path="AddUser" element={<AddUser />}></Route>
+          <Route path="addUser" element={<AddUser />}></Route>
           <Route path="categories" element={<Categories />}></Route>
           <Route
             path="categories/addCategories"
