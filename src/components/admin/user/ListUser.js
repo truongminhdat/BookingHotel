@@ -6,7 +6,7 @@ import "bulma/css/bulma.css";
 const ListUser = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(5);
   const [pages, setPages] = useState(0);
   const [rows, setRow] = useState(0);
   const [query, setQuery] = useState("");
@@ -31,6 +31,7 @@ const ListUser = () => {
     };
     fetchAllUser();
   }, [page, keyword]);
+
   const handlePageClick = ({ selected }) => {
     setPage(selected);
   };
@@ -79,7 +80,7 @@ const ListUser = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr>
+                <tr key={user.id}>
                   <td>
                     <img src={user.url} className="imgUser" />{" "}
                   </td>

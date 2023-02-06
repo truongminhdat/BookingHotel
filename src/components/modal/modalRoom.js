@@ -13,6 +13,7 @@ const ModalRoom = ({ setShowModal }) => {
   const [children, setChildren] = useState("");
   const [numberRoom, setNumberRoom] = useState("");
   const [preview, setPreview] = useState("");
+
   const loadImage = (e) => {
     const file = e.target.files[0];
     setFiles(file);
