@@ -109,9 +109,9 @@ const AddRoom = () => {
         <div className="mb-6">
           <label
             for="countries"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Select an option
+            Select an Categories
           </label>
           <select
             id="countries"
@@ -123,11 +123,11 @@ const AddRoom = () => {
             ))}
           </select>
         </div>
-        <div className="mb-6">
+        <div >
           <input type="file" onChange={loadImage} />
         </div>
         {preview ? (
-          <figure className="image is-128x128">
+          <figure className=" image is-128x128">
             <img src={preview} alt="Preview Image" />
           </figure>
         ) : (
@@ -136,11 +136,11 @@ const AddRoom = () => {
 
         {/* <div className="text-gray-800">{data.msg}</div> */}
 
-        <div className="text-center lg:text-left mt-10">
+        <div className="flex justify-end mr-40 text-center lg:text-left mt-10">
           <button
             type="button"
             onClick={saveRoom}
-            className="inline-block px-7 py-3 bg-slate-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-slate-800 hover:shadow-lg focus:bg-slate-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-800  active:shadow-lg transition duration-300 ease-in-out hover:scale-110"
+            className="x items-center px-7 py-3 bg-slate-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-slate-800 hover:shadow-lg focus:bg-slate-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-800  active:shadow-lg transition duration-300 ease-in-out hover:scale-110"
           >
             Add Room
           </button>

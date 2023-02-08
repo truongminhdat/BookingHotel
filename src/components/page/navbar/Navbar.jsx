@@ -27,17 +27,14 @@ const Navbar = () => {
         })
     })
 
-
     const Logout = () => {
         localStorage.removeItem('accessToken')
     }
-    
-  
     return(
         <div className="navbar">
             <div className="navContainer">
                 <Link to="/" style={{color:"inherit", textDecoration:"none"}}>
-                <span className="logo">lamabooking</span>
+                <span className="logo">Hotel Booking</span>
                 </Link>
                 <AuthContext.Provider value={{authState, setAuthState}}>
                 <div className="navItems">
@@ -48,23 +45,15 @@ const Navbar = () => {
                
                 <button className="navButton"><Link to="/login">Login</Link></button>
             </div>
-
-                       
                 )}
                 {
                     <div>
                          <Link to={`/profile/${id}`}><span>{email}</span></Link> 
                          <span onClick={Logout}>Logout</span>
                     </div>
-                  
-                    
-                    
-                   
                 }
                  </div>
                 </AuthContext.Provider>
-             
-                
             </div>
         </div>
     )

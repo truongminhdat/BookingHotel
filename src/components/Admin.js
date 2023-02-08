@@ -11,17 +11,13 @@ import RoomTypeAdmin from "./roomTypeAdmin";
 import ChangePassword from "./page/changePassword/ChangePassword";
 import AdHotel from "./Hotel";
 import EditRoom from "./admin/room/EditRoom";
-
 import AddRoom from "./admin/room/AddRoom";
 import AddCategories from "./admin/categories/AddCategories";
 import Categories from "./admin/categories/Categories";
 import AddUser from "./admin/user/AddUser";
 import ListUser from "./admin/user/ListUser";
-<<<<<<< HEAD
 import ListRoom from "./admin/room/Room";
-=======
 import EditCategories from "./admin/categories/EditCategories";
->>>>>>> a7dc1bfdfd72cab1da5cb12e99e33da95a5f9567
 
 function Admin() {
   return (
@@ -29,13 +25,8 @@ function Admin() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />}></Route>
-<<<<<<< HEAD
 
           <Route path="room" element={<ListRoom />}></Route>
-=======
-          <Route path="adminlogin" element={<AdminLogin />}></Route>
-          <Route path="Room" element={<Room />}></Route>
->>>>>>> a7dc1bfdfd72cab1da5cb12e99e33da95a5f9567
           <Route path="addRoom" element={<AddRoom />}></Route>
           <Route path="editRoom/:id" element={<EditRoom />}></Route>
           {/* <Route path="orders" element={<Room />}></Route> */}

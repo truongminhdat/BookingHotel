@@ -49,12 +49,12 @@ const AddUser = () => {
     formData.append("file", file);
     formData.append("role", role);
     try {
-      await axios.post("http://localhost:8001/auth/signup", formData, {
+      await axios.post("http://localhost:8001/user/createuser", formData, {
         headers: {
           "Content-type": "multipart/form-data",
         },
       });
-      navigate("/user");
+      // navigate("/user");
     } catch (error) {
       console.log(error);
     }
